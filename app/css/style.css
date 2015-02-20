@@ -1,0 +1,35 @@
+/* ==========================================================================
+   Landing
+   ========================================================================== */
+
+#welcome{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-image: url(../img/1.jpg);
+  background-position: center center;
+  background-size: cover;
+  z-index: 1;
+}
+
+#content{
+  z-index: 100;
+  width: 100%;
+  top: 100vh;
+  height: auto;
+  background-color: white;
+  display: block;
+  position: absolute;
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 150px;
+}
+
+.menuLink{
+  cursor: pointer;
+  text-align: center;
+}
+
+.menuLink:hover{
+  text-decoration: underline;
+}
