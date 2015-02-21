@@ -11,16 +11,22 @@
   z-index: 1;
 }
 
-#logomain{
+#logoContainer{
   position: fixed;
-  height: 60px;
   bottom: 0;
-  width: auto;
-  z-index: 10;
   left: 0;
   right: 0;
-  margin: auto;
-  padding-bottom: 80px;
+  z-index: 10;
+  padding-bottom: 50px;
+}
+
+#logomain{
+  margin: 0;
+  font-family: 'Stanley';
+  font-weight: 900;
+  font-size: 5em;
+  text-align: center;
+  color: white;
 }
 
 #content{
@@ -42,8 +48,8 @@
 
 #menuSuperContainer{
   padding: 20px 0 20px 0;
-  /*background-color: lightgrey;
-  */background: linear-gradient(white, lightgrey); /* Standard syntax */
+  /*background-color: lightgrey;*/
+  background: linear-gradient(white, lightgrey); /* Standard syntax */
   border: 3px solid #C8C8C8;
 }
 
@@ -53,7 +59,6 @@
   font-size: 1.5em; /* 24px */
   font-family: 'Stanley';
   font-weight: 900;
-  letter-spacing: 1.25em; /* 20px */
   line-height: 33px;
 }
 
@@ -124,7 +129,6 @@
   font-size: 3em; /* 48px */
   font-family: 'Stanley';
   font-weight: 700;
-  letter-spacing: 0; /* 40px */
 }
 
 .aboutText span{
@@ -203,7 +207,6 @@
   font-size: 3em; /* 48px */
   font-family: 'Stanley';
   font-weight: 700;
-  letter-spacing: 0; /* 40px */
 }
 
 .contactLink:link, .contactLink:visited{
