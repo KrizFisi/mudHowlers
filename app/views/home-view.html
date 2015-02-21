@@ -7,15 +7,14 @@
     <div id="menuSuperContainer">
       <div class="container">
         <nav>
-            <div class="one column disabled">
-              Journal
-            </div>
           <a ui-sref="home.about" class="menuLink" ng-click="checkUrl('about')">
             <div class="one column" ng-class="{'selected': aboutSelected}">
               About
-              <div ng-show="aboutSelected" class="hr"></div>
             </div>
           </a>
+            <div class="one column disabled">
+              Journal
+            </div>
           <div class="one column disabled">
             Gigs
           </div>
@@ -33,14 +32,13 @@
           <a ui-sref="home.contact" class="menuLink" ng-click="checkUrl('contact')">
             <div class="one column" ng-class="{'selected': contactSelected}">
               Contact
-              <div ng-show="contactSelected" class="hr"></div>
             </div>
           </a>
         </nav>
       </div>
     </div>
 
-    <div id="contentView" class="container">
+    <div id="contentView">
       <div ui-view></div>
     </div>
   </div>

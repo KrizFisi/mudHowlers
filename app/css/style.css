@@ -6,7 +6,6 @@
   width: 100%;
   height: 100%;
   position: fixed;
-  background-image: url(../img/1.jpg);
   background-position: center center;
   background-size: cover;
   z-index: 1;
@@ -38,7 +37,7 @@
 }
 
 #contentView{
-  padding: 100px 0 100px 0;
+  padding: 160px 0 100px 0;
 }
 
 #menuSuperContainer{
@@ -51,14 +50,18 @@
 .menuTitle{
   text-align: center;
   text-transform: uppercase;
-  font-size: 1.5em;
+  font-size: 1.5em; /* 24px */
   font-family: 'Stanley';
   font-weight: 900;
+  letter-spacing: 1.25em; /* 20px */
+  line-height: 33px;
 }
 
 .menuLink:link, .menuLink:visited {
   font-family: 'Stanley';
   font-weight: 700;
+  letter-spacing: 0;
+  line-height: 33px;
   color: grey;
   text-decoration: none;
   text-align: center;
@@ -69,29 +72,48 @@
   color: grey;
 }
 
-.menuLink div:hover{
+.menuLink div{
+  position: relative;
+  z-index : 1;
+}
+
+.menuLink:hover{
   color: black;
+}
+
+.menuLink div:hover:before{
+  color: black;
+  content : "";
+  position: absolute;
+  left    : 25%;
+  bottom  : 0;
+  height  : 1px;
+  width   : 50%;
+  border-bottom: 1px solid black;
 }
 
 .selected{
   color: black;
 }
 
+.selected:before{
+  color: black;
+  content : "";
+  position: absolute;
+  left    : 25%;
+  bottom  : 0;
+  height  : 1px;
+  width   : 50%;
+  border-bottom: 1px solid black;
+}
+
 .disabled{
   font-family: 'Stanley';
   font-weight: 700;
+  line-height: 33px;
   text-decoration: line-through;
   cursor:not-allowed;
   color: grey;
-}
-
-.hr{
-  width: 50%;
-  height: 1px;
-  margin: 0 auto 0 auto;
-  background-color: black;
-  border: none;
-  border-top: 1px solid black;
 }
 
 /* ==========================================================================
@@ -99,14 +121,66 @@
    ========================================================================== */
 
 .aboutText{
-  font-size: 2em;
+  font-size: 3em; /* 48px */
   font-family: 'Stanley';
   font-weight: 700;
+  letter-spacing: 0; /* 40px */
 }
 
 .aboutText span{
   color: #00FD00;
 }
+
+.social{
+  margin-top: 80px !important;
+}
+
+.socialMiniText{
+  margin: 0;
+  padding: 0;
+  font-family: 'Stanley';
+  font-weight: 700;
+  font-size: 0.5em;
+}
+
+
+.socialText{
+  margin: 0;
+  padding: 0;
+
+}
+
+.socialLink:link, .socialLink:visited {
+  font-family: 'Stanley';
+  font-weight: 900;
+  font-size: 1.125em;
+  letter-spacing: 0;
+  color: grey;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.socialLink:link:active, .socialLink:visited:active {
+  color: grey;
+}
+
+.socialLink:hover .hr{
+  display: block;
+}
+
+.socialLink:hover{
+  color: black;
+}
+
+.hr{
+  display: none;
+  width: 100%;
+  margin: 10px auto 0 auto;
+  background-color: black;
+  border: none;
+  border-top: 1px solid black;
+}
+
 
 /* ==========================================================================
    Contact
@@ -122,6 +196,27 @@
   font-size: 0.75em;
   font-family: 'Stanley';
   font-weight: 700;
+}
+
+.contactText{
+  color: grey;
+  font-size: 3em; /* 48px */
+  font-family: 'Stanley';
+  font-weight: 700;
+  letter-spacing: 0; /* 40px */
+}
+
+.contactLink:link, .contactLink:visited{
+  color: black;
+  text-decoration: none;
+}
+
+.contactLink:link:active, .contactLink:visited:active{
+  color: #00FD00;
+}
+
+.contactLink:hover{
+  color: #00FD00;
 }
 
 
