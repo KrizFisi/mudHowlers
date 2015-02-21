@@ -2,42 +2,45 @@
   <div id="welcome">
     <span>&nbsp;</span>
   </div>
+  <img id="logomain" src="img/logo.svg"/>
   <div id="content">
-    <div class="menuSuperContainer">
+    <div id="menuSuperContainer">
       <div class="container">
         <nav>
-          <a ng-disabled="true">
-            <div class="one column menuLink">
+            <div class="one column disabled">
               Journal
             </div>
-          </a>
-          <a ui-sref="home.about">
-            <div class="one column menuLink">
+          <a ui-sref="home.about" class="menuLink" ng-click="checkUrl('about')">
+            <div class="one column" ng-class="{'selected': aboutSelected}">
               About
+              <div ng-show="aboutSelected" class="hr"></div>
             </div>
           </a>
-          <div class="one column menuLink">
+          <div class="one column disabled">
             Gigs
           </div>
-          <div class="ten columns menuLink">
+          <div class="ten columns menuTitle">
             the mud howlers
           </div>
-          <div class="one column menuLink">
+          <div class="one column disabled">
             Media
           </div>
-          <div class="one column menuLink">
+          <a class="menuLink" target="_blank" href="http://www.google.com">
+          <div class="one column">
             Store
           </div>
-          <a ui-sref="home.contact">
-            <div class="one column menuLink">
+          </a>
+          <a ui-sref="home.contact" class="menuLink" ng-click="checkUrl('contact')">
+            <div class="one column" ng-class="{'selected': contactSelected}">
               Contact
+              <div ng-show="contactSelected" class="hr"></div>
             </div>
           </a>
         </nav>
       </div>
     </div>
 
-    <div class="container">
+    <div id="contentView" class="container">
       <div ui-view></div>
     </div>
   </div>

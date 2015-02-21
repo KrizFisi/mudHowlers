@@ -12,6 +12,18 @@
   z-index: 1;
 }
 
+#logomain{
+  position: fixed;
+  height: 60px;
+  bottom: 0;
+  width: auto;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding-bottom: 80px;
+}
+
 #content{
   z-index: 100;
   width: 100%;
@@ -22,16 +34,64 @@
   position: absolute;
   margin-top: 0;
   padding-top: 0;
-  padding-bottom: 150px;
+  padding-bottom: 100px;
 }
 
-.menuLink{
-  cursor: pointer;
+#contentView{
+  padding: 100px 0 100px 0;
+}
+
+#menuSuperContainer{
+  padding: 20px 0 20px 0;
+  /*background-color: lightgrey;
+  */background: linear-gradient(white, lightgrey); /* Standard syntax */
+  border: 3px solid #C8C8C8;
+}
+
+.menuTitle{
   text-align: center;
+  text-transform: uppercase;
+  font-size: 1.5em;
+  font-family: 'Stanley';
+  font-weight: 900;
 }
 
-.menuLink:hover{
-  text-decoration: underline;
+.menuLink:link, .menuLink:visited {
+  font-family: 'Stanley';
+  font-weight: 700;
+  color: grey;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+.menuLink:link:active, .menuLink:visited:active {
+  color: grey;
+}
+
+.menuLink div:hover{
+  color: black;
+}
+
+.selected{
+  color: black;
+}
+
+.disabled{
+  font-family: 'Stanley';
+  font-weight: 700;
+  text-decoration: line-through;
+  cursor:not-allowed;
+  color: grey;
+}
+
+.hr{
+  width: 50%;
+  height: 1px;
+  margin: 0 auto 0 auto;
+  background-color: black;
+  border: none;
+  border-top: 1px solid black;
 }
 
 /* ==========================================================================
@@ -40,8 +100,43 @@
 
 .aboutText{
   font-size: 2em;
+  font-family: 'Stanley';
+  font-weight: 700;
 }
 
 .aboutText span{
   color: #00FD00;
+}
+
+/* ==========================================================================
+   Contact
+   ========================================================================== */
+
+.contactTitle{
+  margin-bottom: 25px;
+  font-family: 'Stanley';
+  font-weight: 900;
+}
+
+.contactBody{
+  font-size: 0.75em;
+  font-family: 'Stanley';
+  font-weight: 700;
+}
+
+
+/* ==========================================================================
+   @Font-face
+   ========================================================================== */
+
+@font-face{
+  font-family: 'Stanley';
+  src: url(../types/Stanley-Poster.otf);
+  font-weight: 900;
+}
+
+@font-face{
+  font-family: 'Stanley';
+  src: url(../types/Stanley-Bold.otf);
+  font-weight: 700;
 }

@@ -1,7 +1,7 @@
 angular.module('mudHowlers').controller('aboutCtrl', aboutCtrl);
 
-aboutCtrl.$inject = ['$scope'];
+aboutCtrl.$inject = ['$scope', '$state'];
 
-function aboutCtrl ($scope){
+function aboutCtrl ($scope, $state){
 
 };
