@@ -3,7 +3,7 @@ angular.module('mudHowlers', [
 ]).
 config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
-	$urlRouterProvider.otherwise('/home/test');
+	$urlRouterProvider.otherwise('/home/about');
 	$stateProvider.
   state('home', {
     abstract: true,
