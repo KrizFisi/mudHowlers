@@ -2,7 +2,8 @@ angular.module('mudHowlers', [
   'ui.router'
 ]).
 config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise('/home');
+
+	$urlRouterProvider.otherwise('/home/test');
 	$stateProvider.
   state('home', {
     abstract: true,
@@ -10,41 +11,14 @@ config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRou
     templateUrl: 'views/home-view.html',
     controller: 'homeCtrl'
   }).
-  state('home.test', {
-    url: '/test',
-    templateUrl: 'views/about-view.html',
-    controller: 'aboutCtrl'
-  });
-  /*
-	state('first', {
-		url: '/first',
-		templateUrl: 'views/firstTemplate.html',
-		controller: 'firstCtrl'
-	}).
-	state('second', {
-		url: '/second',
-		templateUrl: 'views/secondTemplate.html',
-		controller: 'secondCtrl'
-	}).
-  state('about', {
+  state('home.about', {
     url: '/about',
     templateUrl: 'views/about-view.html',
     controller: 'aboutCtrl'
-  })
-
-  ;*/
+  }).
+  state('home.contact', {
+    url: '/contact',
+    templateUrl: 'views/contact-view.html',
+    controller: 'contactCtrl'
+  });
 }]);
-
-
-var isLoggedIn = function($firebase, $state, firebaseRefFactory){
-	var ref = new Firebase(firebaseRefFactory.getMainRef());
-	var authData = ref.getAuth();
-	if (authData) {
-	  console.log("Authenticated user with uid:", authData.uid);
-		return;
-	}
-	else{
-		// send user to login state/route
-		$state.go('login');
-	}
-};

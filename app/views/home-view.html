@@ -1,4 +1,44 @@
 <div ng-controller="homeCtrl">
-  <h1>THIS IS HOME</h1>
-  <div ui-view></div>
+  <div id="welcome">
+    <span>&nbsp;</span>
+  </div>
+  <div id="content">
+    <div class="menuSuperContainer">
+      <div class="container">
+        <nav>
+          <a ng-disabled="true">
+            <div class="one column menuLink">
+              Journal
+            </div>
+          </a>
+          <a ui-sref="home.about">
+            <div class="one column menuLink">
+              About
+            </div>
+          </a>
+          <div class="one column menuLink">
+            Gigs
+          </div>
+          <div class="ten columns menuLink">
+            the mud howlers
+          </div>
+          <div class="one column menuLink">
+            Media
+          </div>
+          <div class="one column menuLink">
+            Store
+          </div>
+          <a ui-sref="home.contact">
+            <div class="one column menuLink">
+              Contact
+            </div>
+          </a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container">
+      <div ui-view></div>
+    </div>
+  </div>
 </div>
