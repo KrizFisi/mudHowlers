@@ -16,7 +16,7 @@
     #Mobile (Landscape)
     #Clearing */
 
-
+    body                                        { margin: 0; padding: 0; }
 
 /* #Base 960 Grid
 ================================================== */
