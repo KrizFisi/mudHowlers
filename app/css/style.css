@@ -134,6 +134,7 @@
   font-family: 'Stanley';
   font-weight: 700;
   letter-spacing: -2px;
+  line-height: 100%;
 }
 
 .aboutText span{
@@ -222,6 +223,7 @@
   font-family: 'Stanley';
   font-weight: 700;
   letter-spacing: -2px;
+  line-height: 100%;
 }
 
 .contactLink:link, .contactLink:visited{
