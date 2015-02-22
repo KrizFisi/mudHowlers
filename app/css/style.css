@@ -58,7 +58,7 @@
 .menuTitle{
   text-align: center;
   text-transform: uppercase;
-  font-size: 1.5em; /* 24px */
+  font-size: 1.3em; /* 24px */
   font-family: 'Stanley';
   font-weight: 900;
   line-height: 33px;
@@ -133,7 +133,8 @@
   font-size: 3em; /* 48px */
   font-family: 'Stanley';
   font-weight: 700;
-  letter-spacing: 0px;
+  letter-spacing: -2px;
+  line-height: 100%;
 }
 
 .aboutText span{
@@ -177,6 +178,7 @@
 
 .socialLink:hover .hr{
   display: block;
+  visibility: initial;
 }
 
 .socialLink:hover{
@@ -184,12 +186,18 @@
 }
 
 .hr{
-  display: none;
+  visibility: hidden;
   width: 100%;
   margin: 10px 0 0 0;
   background-color: black;
   border: none;
   border-top: 2px solid black;
+}
+
+.aboutImage img{
+  width: 100%;
+  height: auto;
+  position: center center;
 }
 
 
@@ -214,6 +222,8 @@
   font-size: 3em; /* 48px */
   font-family: 'Stanley';
   font-weight: 700;
+  letter-spacing: -2px;
+  line-height: 100%;
 }
 
 .contactLink:link, .contactLink:visited{
