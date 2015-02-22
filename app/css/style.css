@@ -48,9 +48,11 @@
 
 #menuSuperContainer{
   padding: 20px 0 20px 0;
-  /*background-color: lightgrey;*/
-  background: linear-gradient(white, lightgrey); /* Standard syntax */
-  border: 3px solid #C8C8C8;
+  background: linear-gradient(#FFFFFF, #E0E0E0); /* Standard syntax */
+  /*border: 3px solid #C8C8C8;*/
+  -webkit-box-shadow: 0 8px 6px -4px #C8C8C8;
+  -moz-box-shadow:    0 8px 6px -4px #C8C8C8;
+  box-shadow:         0 8px 6px -4px #C8C8C8;
 }
 
 .menuTitle{
@@ -131,6 +133,7 @@
   font-size: 3em; /* 48px */
   font-family: 'Stanley';
   font-weight: 700;
+  letter-spacing: 0px;
 }
 
 .aboutText span{
@@ -186,7 +189,7 @@
   margin: 10px 0 0 0;
   background-color: black;
   border: none;
-  border-top: 1px solid black;
+  border-top: 2px solid black;
 }
 
 
