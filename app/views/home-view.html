@@ -6,7 +6,7 @@
     <p id="logomain">The Mud Howlers</p>
   </div>
   <div id="content">
-    <div id="menuSuperContainer">
+    <div id="menuSuperContainer" sticky>
       <div class="container">
         <nav>
           <a ui-sref="home.about" class="menuLink" ng-click="checkUrl('about')">
@@ -41,7 +41,7 @@
     </div>
 
     <div id="contentView">
-      <div ui-view></div>
+      <div class="childView" ui-view></div>
     </div>
   </div>
 </div>
