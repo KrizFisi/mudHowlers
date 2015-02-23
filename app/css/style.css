@@ -1,4 +1,38 @@
 /* ==========================================================================
+   child ui-views animations for entering and leaving
+   ========================================================================== */
+
+.childView.ng-enter{
+  -webkit-transition: 0.5s linear all;
+  -moz-transition:    0.5s linear all;
+  -o-transition:      0.5s linear all;
+  transition:         0.5s linear all;
+}
+.childView.ng-leave {
+  -webkit-transition: 0.01s linear all;
+  -moz-transition:    0.01s linear all;
+  -o-transition:      0.01s linear all;
+  transition:         0.01s linear all;
+}
+
+.childView.ng-enter {
+  opacity: 0;
+}
+
+.childView.ng-enter-active {
+  opacity: 1;
+}
+
+.childView.ng-leave {
+  opacity: 1;
+}
+
+.childView.ng-leave-active {
+  opacity: 0;
+}
+
+
+/* ==========================================================================
    Landing
    ========================================================================== */
 
@@ -47,6 +81,11 @@
 }
 
 #menuSuperContainer{
+  /*
+  position: fixed;
+  top: 0;
+  */
+  z-index: 1;
   padding: 20px 0 20px 0;
   background: linear-gradient(#FFFFFF, #E0E0E0); /* Standard syntax */
   /*border: 3px solid #C8C8C8;*/
@@ -124,6 +163,9 @@
   cursor:not-allowed;
   color: grey;
 }
+
+
+
 
 /* ==========================================================================
    About

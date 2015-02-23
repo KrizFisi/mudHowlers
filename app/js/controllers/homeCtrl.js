@@ -25,5 +25,4 @@ function homeCtrl($scope, $document, $state){
   };
   $scope.initialUrl = $state.$current.url.source;
   $scope.checkUrl($scope.initialUrl.substring(6));
-
 };

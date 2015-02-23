@@ -1,5 +1,7 @@
 angular.module('mudHowlers', [
-  'ui.router'
+  'ui.router',
+  'ngAnimate',
+  'sticky'
 ]).
 config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
