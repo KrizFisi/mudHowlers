@@ -38,19 +38,18 @@
 
 #welcome{
   width: 100%;
-  height: 100%;
-  position: fixed;
+  height: 100vh;
   background-position: center center;
   background-size: cover;
   z-index: -1;
 }
 
 #logoContainer{
-  position: fixed;
-  bottom: 0;
+  position: absolute;
+  top: 80vh;
   left: 0;
   right: 0;
-  z-index: -1;
+  z-index: 1;
   padding-bottom: 50px;
 }
 
