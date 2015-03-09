@@ -16,10 +16,17 @@ function homeCtrl($scope, $document, $state){
       case 'about':
         $scope.aboutSelected = true;
         $scope.contactSelected = false;
+        $scope.journalSelected = false;
         break;
       case 'contact':
         $scope.aboutSelected = false;
         $scope.contactSelected = true;
+        $scope.journalSelected = false;
+        break;
+      case 'journal':
+        $scope.aboutSelected = false;
+        $scope.contactSelected = false;
+        $scope.journalSelected = true;
         break;
     }
   };
