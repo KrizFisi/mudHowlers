@@ -280,6 +280,38 @@
   color: #00FD00;
 }
 
+/* ==========================================================================
+   Journal
+   ========================================================================== */
+   .floater{
+     float: left !important;
+   }
+
+   .postTitle{
+     font-family: 'Stanley';
+     font-weight: 900;
+     font-size: 0.875em;
+   }
+
+   .postText, .postAuthor{
+     font-family: 'Stanley';
+     font-weight: 700;
+     font-size: 0.875em;
+   }
+
+   .postDate{
+     font-family: 'Stanley';
+     font-weight: 700;
+     font-size: 0.700em;
+     color: grey;
+   }
+
+   .postImage{
+     width: 100%;
+     height: auto;
+   }
+
+
 
 /* ==========================================================================
    @Font-face

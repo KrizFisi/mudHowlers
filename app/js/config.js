@@ -1,7 +1,8 @@
 angular.module('mudHowlers', [
   'ui.router',
   'ngAnimate',
-  'sticky'
+  'sticky',
+  'firebase'
 ]).
 config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
@@ -17,6 +18,11 @@ config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRou
     url: '/about',
     templateUrl: 'views/about-view.html',
     controller: 'aboutCtrl'
+  }).
+  state('home.journal', {
+    url: '/journal',
+    templateUrl: 'views/journal-view.html',
+    controller: 'journalCtrl'
   }).
   state('home.contact', {
     url: '/contact',

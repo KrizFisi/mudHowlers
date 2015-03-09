@@ -1,0 +1,9 @@
+<div ng-controller="journalCtrl">
+  <div class="container">
+    <div class="twelve columns" ng-show="isLoading"><h1>Cargando...</h1></div>
+    <div class="floater" ng-repeat="post in posts track by $index">
+      <div class="newPost" >
+      </div>
+    </div>
+  </div>
+</div>

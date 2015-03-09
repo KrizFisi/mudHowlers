@@ -14,9 +14,11 @@
               About
             </div>
           </a>
-            <div class="two columns disabled">
+          <a ui-sref="home.journal" class="menuLink" ng-click="checkUrl('journal')">
+            <div class="two columns" ng-class="{'selected': journalSelected}">
               Journal
             </div>
+          </a>
           <div class="two columns disabled">
             Gigs
           </div>
