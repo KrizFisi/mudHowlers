@@ -3,6 +3,7 @@ angular.module('mudHowlers').controller('journalCtrl', journalCtrl);
 journalCtrl.$inject = ['$scope', '$state', '$firebase'];
 
 function journalCtrl($scope, $state, $firebase){
+  /*
   $scope.isLoading = true;
   var location = 'https://mudhowlers.firebaseio.com/Journal/posts/';
   var journalRef = new Firebase(location);
@@ -67,11 +68,13 @@ function journalCtrl($scope, $state, $firebase){
         $scope.element.append("<p class='postAuthor'>" + $scope.surrogateObj.author + "</p>");
         $scope.element.append("<p class='postDate'>" + $scope.surrogateObj.dateDay + '/' + $scope.surrogateObj.dateMonth + '/' + $scope.surrogateObj.dateYear + "</p>");
         */
+        /*
       }
       $scope.element.removeClass('newPost');
     }
   }, true);
-
+  */
+/*
   $scope.postsArray.$watch(function(child){
     $scope.childObj = $firebase(new Firebase(location + child.key)).$asObject();
     $scope.childObj.$loaded().then(function(data){
@@ -89,5 +92,6 @@ function journalCtrl($scope, $state, $firebase){
       }
     });
   });
+  */
   //$scope.postsArray.$destroy();
 };

@@ -22,7 +22,7 @@ config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRou
   state('home.journal', {
     url: '/journal',
     templateUrl: 'views/journal-view.html',
-    controller: 'homeCtrl'
+    controller: 'journalCtrl'
   }).
   state('home.contact', {
     url: '/contact',
