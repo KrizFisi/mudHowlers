@@ -1,4 +1,4 @@
-angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', function($firebase, $window){
+angular.module('mudHowlers').directive('landingContent', ['$firebase', '$window', function($firebase, $window){
     return{
       restrict: 'A',
       scope: false,
@@ -18,9 +18,7 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', fu
         scope.end = 10;
         scope.isLoading = true;
         var postsRef = 'https://mudhowlers.firebaseio.com/posts/';
-        var location = 'https://mudhowlers.firebaseio.com/' + attrs.getContent + '/posts/';
-        //console.log(location);
-        var firebaseRef = new Firebase(location);
+        var firebaseRef = new Firebase(postsRef);
         scope.posts = [];
 
         scope.landscapeSizes = [
@@ -29,13 +27,11 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', fu
           {height: '305px'},
           {height: '200px'},
         ];
-
         scope.portraitSizes = [
           {height: '931px'},
           {height: '696px'},
           {height: '460px'},
         ];
-
         scope.socialSizes = [
           {height: '615px'},
           {height: '460px'},
@@ -44,13 +40,12 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', fu
         ];
 
         scope.textSizes = ['four columns', 'four columns offset-by-three'];
-        scope.videoSizes = ['nine columns', 'nine columns offset-by-two'];
-        scope.imagesSizes = ['six columns offset-by-one', 'five columns offset-by-one'];
 
         scope.postsArray =  firebaseRef;
         scope.getData = function(){
-          //console.log(firebaseRef);
-          scope.postsArray.startAt(scope.begin).limit(scope.end).on('child_added', function(child){
+          //console.log(postsRef);
+          scope.postsArray.startAt(scope.begin).limit(scope.end).on('child_added', function(child) {
+            // code to handle new child.
             //console.log(child.key());
             scope.childObj = $firebase(new Firebase(postsRef + child.key())).$asObject();
             scope.childObj.$loaded().then(function(data){
@@ -69,6 +64,27 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', fu
               }
             });
           });
+          /*
+          scope.postsArray.startAt(scope.begin).limit(scope.end).on('child_added', function(child){
+            console.log(child);
+            scope.childObj = $firebase(new Firebase(postsRef + child.key())).$asObject();
+            scope.childObj.$loaded().then(function(data){
+              //console.log(data);
+              if(data.contentType == 'Texto'){
+                scope.posts.push(data);
+              }
+              if(data.contentType == 'Video'){
+                scope.posts.push(data);
+              }
+              if(data.contentType == 'Imagen'){
+                scope.posts.push(data);
+              }
+              else{
+                // do nothing
+              }
+            });
+          });
+          */
         };
 
 

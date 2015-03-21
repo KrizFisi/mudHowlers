@@ -19,15 +19,19 @@
               Journal
             </div>
           </a>
-          <div class="two columns disabled">
-            Gigs
-          </div>
+          <a ui-sref="home.gigs" class="menuLink" ng-click="checkUrl('gigs')">
+            <div class="two columns" ng-class="{'selected': gigsSelected}">
+              Gigs
+            </div>
+          </a>
           <div class="four columns menuTitle">
             the mud howlers
           </div>
-          <div class="two columns disabled">
-            Media
-          </div>
+          <a ui-sref="home.media" class="menuLink" ng-click="checkUrl('media')">
+            <div class="two columns" ng-class="{'selected': mediaSelected}">
+              Media
+            </div>
+          </a>
           <a class="menuLink" target="_blank" href="https://www.kichink.com/stores/themudhowlers#.VOoSiPnF_k2">
           <div class="two columns">
             Store
