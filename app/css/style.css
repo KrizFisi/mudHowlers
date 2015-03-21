@@ -283,9 +283,54 @@
 /* ==========================================================================
    Journal
    ========================================================================== */
+
    .floater{
      float: left !important;
    }
+
+
+   .landscape-title-1{
+     width: 290px;
+     margin: 10px 0 0 10px;
+     font-family: 'Stanley';
+     font-weight: 900;
+     font-size: 1.6em;
+   }
+
+   .landscape-author-1{
+     position: absolute;
+     bottom: 10px;
+     left: 10px;
+     width: 290px;
+     margin: 0;
+     font-family: 'Stanley';
+     font-weight: 700;
+     font-style: italic;
+     font-size: 0.5em;
+   }
+
+   .landscape-author-1 span{
+     color: grey;
+   }
+
+   .landscape-date-1{
+     position: absolute;
+     bottom: 10px;
+     left: 100px;
+     width: 200px;
+     margin: 0;
+     font-family: 'Stanley';
+     font-weight: 700;
+     font-style: italic;
+     font-size: 0.5em;
+   }
+
+   .landscape-date-1 span{
+     color: grey;
+   }
+
+
+   /**/
 
    .postTitle{
      font-family: 'Stanley';

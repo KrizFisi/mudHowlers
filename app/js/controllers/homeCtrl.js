@@ -17,16 +17,36 @@ function homeCtrl($scope, $document, $state){
         $scope.aboutSelected = true;
         $scope.contactSelected = false;
         $scope.journalSelected = false;
+        $scope.mediaSelected = false;
+        $scope.gigsSelected = false;
         break;
       case 'contact':
         $scope.aboutSelected = false;
         $scope.contactSelected = true;
         $scope.journalSelected = false;
+        $scope.mediaSelected = false;
+        $scope.gigsSelected = false;
         break;
       case 'journal':
         $scope.aboutSelected = false;
         $scope.contactSelected = false;
         $scope.journalSelected = true;
+        $scope.mediaSelected = false;
+        $scope.gigsSelected = false;
+        break;
+      case 'media':
+        $scope.mediaSelected = true;
+        $scope.aboutSelected = false;
+        $scope.contactSelected = false;
+        $scope.journalSelected = false;
+        $scope.gigsSelected = false;
+        break;
+      case 'gigs':
+        $scope.gigsSelected = true;
+        $scope.mediaSelected = false;
+        $scope.aboutSelected = false;
+        $scope.contactSelected = false;
+        $scope.journalSelected = false;
         break;
     }
   };
