@@ -6,8 +6,12 @@
     <p id="logomain">The Mud Howlers</p>
   </div>
   <div id="content">
-    <div id="menuSuperContainer" sticky>
-      <div class="container">
+    <div id="menuSuperContainer" class="transformable" ng-class="{'small':isSmall, 'big':!isSmall}" sticky>
+      <img src='img/menuIcon.svg' class='menuIcon' ng-click='showMenu()'>
+      <div class="container responsiveTitle">
+        the mud howlers
+      </div>
+      <div class="container menuAnimation" ng-show="responsiveMenu">
         <nav>
           <a ui-sref="home.about" class="menuLink" ng-click="checkUrl('about')">
             <div class="two columns" ng-class="{'selected': aboutSelected}">

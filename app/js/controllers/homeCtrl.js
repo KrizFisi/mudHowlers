@@ -1,8 +1,31 @@
 angular.module('mudHowlers').controller('homeCtrl', homeCtrl);
 
-homeCtrl.$inject = ['$scope', '$document', '$state'];
+homeCtrl.$inject = ['$scope', '$document', '$state', '$window'];
 
-function homeCtrl($scope, $document, $state){
+function homeCtrl($scope, $document, $state, $window){
+
+  var target = angular.element($window);
+  target.bind('resize', function(){
+    var currentSize = $document[0].body.offsetWidth;
+    console.log(currentSize);
+    if (currentSize >= 750){
+      $scope.responsiveMenu = true;
+      $scope.isSmall = false;
+    }
+    else{
+      $scope.responsiveMenu = false;
+      $scope.isSmall = true;
+    }
+  });
+
+
+
+  $scope.responsiveMenu = true;
+  $scope.isSmall = false;
+  $scope.showMenu = function(){
+    $scope.responsiveMenu = !$scope.responsiveMenu;
+    $scope.isSmall = !$scope.isSmall
+  };
 
   $scope.images = ['url(img/1.jpg)', 'url(img/2.jpg)', 'url(img/3.jpg)', 'url(img/4.jpg)', 'url(img/5.jpg)', 'url(img/6.jpg)'];
   var target = document.getElementById('welcome');
