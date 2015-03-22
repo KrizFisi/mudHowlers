@@ -132,6 +132,7 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', fu
                     'float': 'left',
                     'position': 'relative',
                   });
+                  scope.element.append("<div class='hoverBlock'></div>");
                   scope.element.append("<p class='landscape-title-1'>" + scope.surrogateObj.title + "</p>");
                   scope.element.append("<p class='landscape-author-1'> <span>Posted by</span><br>" + scope.surrogateObj.author + "</p>");
                   scope.element.append("<p class='landscape-date-1'> <span>Date</span><br> " + scope.surrogateObj.dateDay + '.' + scope.surrogateObj.dateMonth + '.' + scope.surrogateObj.dateYear + "</p>");
@@ -158,6 +159,7 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', fu
                     'float': 'left',
                     'position': 'relative',
                   });
+                  scope.element.append("<div class='hoverBlock'></div>");
                   scope.element.append("<p class='landscape-title-1'>" + scope.surrogateObj.title + "</p>");
                   scope.element.append("<p class='landscape-author-1'> <span>Posted by</span><br> " + scope.surrogateObj.author + "</p>");
                   scope.element.append("<p class='landscape-date-1'> <span>Date</span><br> " + scope.surrogateObj.dateDay + '.' + scope.surrogateObj.dateMonth + '.' + scope.surrogateObj.dateYear + "</p>");
@@ -193,6 +195,7 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', fu
                   else{
                     scope.element.append("<p class='landscape-title-1'>" + scope.surrogateObj.title + "</p>");
                   }
+                  scope.element.append("<div class='hoverBlock'></div>");
                   scope.element.append("<p class='landscape-author-1'> <span>Posted by</span><br>" + scope.surrogateObj.author + "</p>");
                   scope.element.append("<p class='landscape-date-1'> <span>Date</span><br> " + scope.surrogateObj.dateDay + '.' + scope.surrogateObj.dateMonth + '.' + scope.surrogateObj.dateYear + "</p>");
                   break;
