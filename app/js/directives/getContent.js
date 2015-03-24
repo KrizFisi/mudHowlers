@@ -19,7 +19,6 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', fu
         scope.isLoading = true;
         var postsRef = 'https://mudhowlers.firebaseio.com/posts/';
         var location = 'https://mudhowlers.firebaseio.com/' + attrs.getContent + '/posts/';
-        //console.log(location);
         var firebaseRef = new Firebase(location);
         scope.posts = [];
 
@@ -44,14 +43,12 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', fu
         ];
 
         scope.textSizes = ['four columns', 'four columns offset-by-three'];
-        scope.videoSizes = ['nine columns', 'nine columns offset-by-two'];
-        scope.imagesSizes = ['six columns offset-by-one', 'five columns offset-by-one'];
 
         scope.postsArray =  firebaseRef;
         scope.getData = function(){
-          //console.log(firebaseRef);
+
           scope.postsArray.startAt(scope.begin).limit(scope.end).on('child_added', function(child){
-            //console.log(child.key());
+            console.log(child.val());
             scope.childObj = $firebase(new Firebase(postsRef + child.key())).$asObject();
             scope.childObj.$loaded().then(function(data){
               console.log(data);

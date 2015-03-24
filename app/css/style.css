@@ -398,6 +398,56 @@
      color: grey;
    }
 
+   .landscape-title-2{
+     z-index: 3 !important;
+     width: 290px;
+     margin: 10px 0 0 10px;
+     font-family: 'Stanley';
+     font-weight: 900;
+     font-size: 1.6em;
+   }
+
+   .social-content-2{
+     z-index: 3 !important;
+     width: 290px;
+     margin: 10px 0 0 10px;
+     font-family: 'Stanley';
+     font-weight: 700;
+     font-size: 1.6em;
+   }
+
+   .landscape-author-2{
+     position: absolute;
+     bottom: 10px;
+     left: 10px;
+     width: 290px;
+     margin: 0;
+     font-family: 'Stanley';
+     font-weight: 700;
+     font-style: italic;
+     font-size: 0.5em;
+   }
+
+   .landscape-author-2 span{
+     color: grey;
+   }
+
+   .landscape-date-2{
+     position: absolute;
+     bottom: 10px;
+     left: 100px;
+     width: 200px;
+     margin: 0;
+     font-family: 'Stanley';
+     font-weight: 700;
+     font-style: italic;
+     font-size: 0.5em;
+   }
+
+   .landscape-date-2 span{
+     color: grey;
+   }
+
 
    /**/
 
