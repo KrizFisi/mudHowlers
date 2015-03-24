@@ -71,6 +71,13 @@ function homeCtrl($scope, $document, $state, $window){
         $scope.contactSelected = false;
         $scope.journalSelected = false;
         break;
+      case 'landing':
+        $scope.gigsSelected = false;
+        $scope.mediaSelected = false;
+        $scope.aboutSelected = false;
+        $scope.contactSelected = false;
+        $scope.journalSelected = false;
+        break;
     }
   };
   $scope.initialUrl = $state.$current.url.source;

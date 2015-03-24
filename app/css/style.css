@@ -1,3 +1,7 @@
+body{
+  font-family: 'Stanley';
+}
+
 /* ==========================================================================
    child ui-views animations for entering and leaving
    ========================================================================== */
@@ -334,98 +338,141 @@
      z-index: 2 !important;
    }
 
-   .hoverBlock{
-     display: none;
-     content: " ";
-     position: absolute;
-     top: 0;
-     left: 0;
-     width: 100%;
-     height: 100%;
-     opacity: .4;
-     z-index: -1;
-     background-color: white;
-   }
-   .post:hover .hoverBlock{
-     display: inline
-   }
-
-   .post:hover > .landscape-title-1, .post:hover > .landscape-author-1, .post:hover > .landscape-date-1{
-     display: inline;
-   }
-
-   .landscape-title-1{
-     display: none;
+   .post-title{
      z-index: 3 !important;
-     width: 290px;
-     margin: 10px 0 0 10px;
-     font-family: 'Stanley';
-     font-weight: 900;
-     font-size: 1.6em;
-   }
-
-   .landscape-author-1{
-     display: none;
-     position: absolute;
-     bottom: 10px;
-     left: 10px;
-     width: 290px;
+     width: 96%;
+     height: 40px;
+     padding: 0;
      margin: 0;
-     font-family: 'Stanley';
-     font-weight: 700;
-     font-style: italic;
-     font-size: 0.5em;
-   }
-
-   .landscape-author-1 span{
-     color: grey;
-   }
-
-   .landscape-date-1{
-     display: none;
-     position: absolute;
-     bottom: 10px;
-     left: 100px;
-     width: 200px;
-     margin: 0;
-     font-family: 'Stanley';
-     font-weight: 700;
-     font-style: italic;
-     font-size: 0.5em;
-   }
-
-   .landscape-date-1 span{
-     color: grey;
-   }
-
-
-   /**/
-
-   .postTitle{
-     font-family: 'Stanley';
+     margin-top : 20px;
+     margin-left: 4%;
      font-weight: 900;
-     font-size: 0.875em;
+     font-size: 1.5em;
+     line-height: 40px;
    }
 
-   .postText, .postAuthor{
-     font-family: 'Stanley';
+   .post-content{
+     z-index: 3 !important;
+     width: 96%;
+     height: 40px;
+     margin: 0;
+     margin-top : 20px;
+     margin-left: 4%;
      font-weight: 700;
-     font-size: 0.875em;
-   }
+     font-size: 1.4em;
+     line-height: 40px;
+     vertical-align: text-bottom;
+    }
 
-   .postDate{
-     font-family: 'Stanley';
-     font-weight: 700;
-     font-size: 0.700em;
-     color: grey;
-   }
+    .post-author{
+      position: absolute;
+      bottom: 25px;
+      left: 4%;
+      width: 96%;
+      margin: 0;
+      font-weight: 700;
+      font-style: italic;
+      font-size: 0.6em;
+    }
 
-   .postImage{
-     width: 100%;
-     height: auto;
-   }
+    .post-author span{
+      color: grey;
+    }
 
+    .post-date{
+      position: absolute;
+      bottom: 25px;
+      left: 125px;
+      width: 200px;
+      margin: 0;
+      font-weight: 700;
+      font-style: italic;
+      font-size: 0.6em;
+    }
 
+    .post-date span{
+      color: grey;
+    }
+
+    .hoverBlock{
+      display: none;
+      content: " ";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: .4;
+      z-index: -1;
+      background-color: white;
+    }
+    .post:hover .hoverBlock{
+      display: inline
+    }
+
+    .post:hover > .image-title, .post:hover > .image-author, .post:hover > .image-date{
+      display: inline-block;
+    }
+
+    .image-title{
+      display: none;
+      z-index: 3 !important;
+      width: 96%;
+      height: 40px;
+      padding: 0;
+      margin: 0;
+      margin-top : 20px;
+      margin-left: 4%;
+      font-weight: 900;
+      font-size: 1.5em;
+      line-height: 40px;
+    }
+
+    .image-content{
+      display: none;
+      z-index: 3 !important;
+      width: 96%;
+      height: 40px;
+      margin: 0;
+      margin-top : 20px;
+      margin-left: 4%;
+      font-weight: 700;
+      font-size: 1.5em;
+      line-height: 40px;
+      vertical-align: text-bottom;
+     }
+
+     .image-author{
+       display: none;
+       position: absolute;
+       bottom: 25px;
+       left: 4%;
+       width: 96%;
+       margin: 0;
+       font-weight: 700;
+       font-style: italic;
+       font-size: 0.6em;
+     }
+
+     .image-author span{
+       color: grey;
+     }
+
+     .image-date{
+       display: none;
+       position: absolute;
+       bottom: 25px;
+       left: 125px;
+       width: 200px;
+       margin: 0;
+       font-weight: 700;
+       font-style: italic;
+       font-size: 0.6em;
+     }
+
+     .image-date span{
+       color: grey;
+     }
 
 /* ==========================================================================
    @Font-face

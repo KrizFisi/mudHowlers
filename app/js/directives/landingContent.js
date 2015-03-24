@@ -39,52 +39,31 @@ angular.module('mudHowlers').directive('landingContent', ['$firebase', '$window'
           {height: '226px'},
         ];
 
-        scope.textSizes = ['four columns', 'four columns offset-by-three'];
-
         scope.postsArray =  firebaseRef;
         scope.getData = function(){
-          //console.log(postsRef);
           scope.postsArray.startAt(scope.begin).limit(scope.end).on('child_added', function(child) {
-            // code to handle new child.
-            //console.log(child.key());
+            // code to handle childs
             scope.childObj = $firebase(new Firebase(postsRef + child.key())).$asObject();
             scope.childObj.$loaded().then(function(data){
-              console.log(data);
-              if(data.contentType == 'Texto'){
-                scope.posts.push(data);
-              }
-              if(data.contentType == 'Video'){
-                scope.posts.push(data);
-              }
-              if(data.contentType == 'Imagen'){
-                scope.posts.push(data);
+              if(data.status == true){
+                if(data.contentType == 'Texto'){
+                  scope.posts.push(data);
+                }
+                if(data.contentType == 'Video'){
+                  scope.posts.push(data);
+                }
+                if(data.contentType == 'Imagen'){
+                  scope.posts.push(data);
+                }
+                else{
+                  // do nothing
+                }
               }
               else{
-                // do nothing
+                // if false, object has been deleted
               }
             });
           });
-          /*
-          scope.postsArray.startAt(scope.begin).limit(scope.end).on('child_added', function(child){
-            console.log(child);
-            scope.childObj = $firebase(new Firebase(postsRef + child.key())).$asObject();
-            scope.childObj.$loaded().then(function(data){
-              //console.log(data);
-              if(data.contentType == 'Texto'){
-                scope.posts.push(data);
-              }
-              if(data.contentType == 'Video'){
-                scope.posts.push(data);
-              }
-              if(data.contentType == 'Imagen'){
-                scope.posts.push(data);
-              }
-              else{
-                // do nothing
-              }
-            });
-          });
-          */
         };
 
 
@@ -93,21 +72,7 @@ angular.module('mudHowlers').directive('landingContent', ['$firebase', '$window'
             scope.isLoading = false;
             element.append("<div class='newPost'></div>")
             scope.surrogateObj = scope.posts[scope.posts.length - 1];
-            //var target = document.getElementsByClassName('newPost');
             scope.element = angular.element(document.getElementsByClassName('newPost'));
-
-
-
-
-            //console.log(scope.surrogateObj);
-            if(scope.surrogateObj.contentType == 'Texto'){
-              scope.element.addClass(scope.textSizes[Math.floor(Math.random() *scope.textSizes.length)]);
-              scope.element.addClass('post');
-              scope.element.append("<p class='postTitle'>" + scope.surrogateObj.title + "</p>");
-              scope.element.append("<p class='postText'>" + scope.surrogateObj.content + "</p>");
-              scope.element.append("<p class='postAuthor'>" + scope.surrogateObj.author + "</p>");
-              scope.element.append("<p class='postDate'>" + scope.surrogateObj.dateDay + '/' + scope.surrogateObj.dateMonth + '/' + scope.surrogateObj.dateYear + "</p>");
-            }
             if(scope.surrogateObj.contentType == 'Video'){
               scope.element.addClass('post');
               scope.element.addClass('sixteen columns');
@@ -116,104 +81,127 @@ angular.module('mudHowlers').directive('landingContent', ['$firebase', '$window'
                 'height': '552px',
                 'float': 'left',
               });
-              //scope.element.append("<p class='postTitle'>" + scope.surrogateObj.title + "</p>");
               scope.element.append("<iframe width='100%' height='100%' src='" + scope.surrogateObj.content + "'></iframe>");
-              //scope.element.append("<p class='postAuthor'>" + scope.surrogateObj.author + "</p>");
-              //scope.element.append("<p class='postDate'>" + scope.surrogateObj.dateDay + '/' + scope.surrogateObj.dateMonth + '/' + scope.surrogateObj.dateYear + "</p>");
             }
-            if(scope.surrogateObj.contentType == 'Imagen'){
+            else{
               var heriarchy = scope.surrogateObj.heriarchy;
+              var type = scope.surrogateObj.contentType;
+              scope.element.addClass('post');
               switch(scope.surrogateObj.contentPresentation){
                 case 'Landscape':
-                  scope.element.addClass('post');
-                  if(heriarchy == 1){
+                  if(heriarchy == 1)
                     scope.element.addClass('sixteen columns');
-                  }
-                  if(heriarchy == 2){
+                  if(heriarchy == 2)
                     scope.element.addClass('two-thirds column');
-                  }
-                  if(heriarchy == 3){
+                  if(heriarchy == 3)
                     scope.element.addClass('eight columns');
-                  }
-                  if(heriarchy == 4){
+                  if(heriarchy == 4)
                     scope.element.addClass('one-third column');
+                  if(type == 'Imagen'){
+                    scope.element.css({
+                      'margin-bottom': '10px',
+                      'height': scope.landscapeSizes[heriarchy-1].height,
+                      'background-image': 'url(' + scope.surrogateObj.content + ')',
+                      'background-position': 'center center',
+                      'background-size': 'cover',
+                      'z-index': '-1',
+                      'float': 'left',
+                      'position': 'relative',
+                    });
+                    scope.element.append("<div class='hoverBlock'></div>");
+                    scope.element.append("<h1 class='image-title'>" + scope.surrogateObj.title + "</h1>");
+                    scope.element.append("<p class='image-author'> <span>Posted by</span><br>" + scope.surrogateObj.author + "</p>");
+                    scope.element.append("<p class='image-date'> <span>Date</span><br> " + scope.surrogateObj.dateDay + '.' + scope.surrogateObj.dateMonth + '.' + scope.surrogateObj.dateYear + "</p>");
                   }
-                  scope.element.css({
-                    'margin-bottom': '10px',
-                    'height': scope.landscapeSizes[heriarchy-1].height,
-                    'background-image': 'url(' + scope.surrogateObj.content + ')',
-                    'background-position': 'center center',
-                    'background-size': 'cover',
-                    'z-index': '-1',
-                    'float': 'left',
-                    'position': 'relative',
-                  });
-                  scope.element.append("<div class='hoverBlock'></div>");
-                  scope.element.append("<p class='landscape-title-1'>" + scope.surrogateObj.title + "</p>");
-                  scope.element.append("<p class='landscape-author-1'> <span>Posted by</span><br>" + scope.surrogateObj.author + "</p>");
-                  scope.element.append("<p class='landscape-date-1'> <span>Date</span><br> " + scope.surrogateObj.dateDay + '.' + scope.surrogateObj.dateMonth + '.' + scope.surrogateObj.dateYear + "</p>");
-                  break;
+                  else if(type == 'Texto'){
+                    scope.element.css({
+                      'margin-bottom': '10px',
+                      'height': scope.landscapeSizes[heriarchy-1].height,
+                      'z-index': '-1',
+                      'float': 'left',
+                      'position': 'relative',
+                    });
+                    scope.element.append("<h1 class='post-title'>" + scope.surrogateObj.title + "</h1>");
+                    scope.element.append("<p class='post-content'>" + scope.surrogateObj.content + "</p>");
+                    scope.element.append("<p class='post-author'> <span>Posted by</span><br>" + scope.surrogateObj.author + "</p>");
+                    scope.element.append("<p class='post-date'> <span>Date</span><br> " + scope.surrogateObj.dateDay + '.' + scope.surrogateObj.dateMonth + '.' + scope.surrogateObj.dateYear + "</p>");
+                  }
+                break;
                 case 'Portrait':
-                  //console.log(scope.surrogateObj);
-                  scope.element.addClass('post');
-                  if(heriarchy == 1){
+                  if(heriarchy == 1)
                     scope.element.addClass('two-thirds column');
-                  }
-                  if(heriarchy == 2){
+                  if(heriarchy == 2)
                     scope.element.addClass('eight columns');
-                  }
-                  if(heriarchy == 3){
+                  if(heriarchy == 3)
                     scope.element.addClass('one-third column');
+                  if(type == 'Imagen'){
+                    scope.element.css({
+                      'margin-bottom': '10px',
+                      'height': scope.portraitSizes[heriarchy-1].height,
+                      'background-image': 'url(' + scope.surrogateObj.content + ')',
+                      'background-position': 'center center',
+                      'background-size': 'cover',
+                      'z-index': '-1',
+                      'float': 'left',
+                      'position': 'relative',
+                    });
+                    scope.element.append("<div class='hoverBlock'></div>");
+                    scope.element.append("<h1 class='image-title'>" + scope.surrogateObj.title + "</h1>");
+                    scope.element.append("<p class='image-author'> <span>Posted by</span><br>" + scope.surrogateObj.author + "</p>");
+                    scope.element.append("<p class='image-date'> <span>Date</span><br> " + scope.surrogateObj.dateDay + '.' + scope.surrogateObj.dateMonth + '.' + scope.surrogateObj.dateYear + "</p>");
                   }
-                  scope.element.css({
-                    'margin-bottom': '10px',
-                    'height': scope.portraitSizes[heriarchy-1].height,
-                    'background-image': 'url(' + scope.surrogateObj.content + ')',
-                    'background-position': 'center center',
-                    'background-size': 'cover',
-                    'z-index': '-1',
-                    'float': 'left',
-                    'position': 'relative',
-                  });
-                  scope.element.append("<div class='hoverBlock'></div>");
-                  scope.element.append("<p class='landscape-title-1'>" + scope.surrogateObj.title + "</p>");
-                  scope.element.append("<p class='landscape-author-1'> <span>Posted by</span><br> " + scope.surrogateObj.author + "</p>");
-                  scope.element.append("<p class='landscape-date-1'> <span>Date</span><br> " + scope.surrogateObj.dateDay + '.' + scope.surrogateObj.dateMonth + '.' + scope.surrogateObj.dateYear + "</p>");
-
+                  else if(type == 'Texto'){
+                    scope.element.css({
+                      'margin-bottom': '10px',
+                      'height': scope.portraitSizes[heriarchy-1].height,
+                      'z-index': '-1',
+                      'float': 'left',
+                      'position': 'relative',
+                    });
+                    scope.element.append("<h1 class='post-title'>" + scope.surrogateObj.title + "</h1>");
+                    scope.element.append("<p class='post-content'>" + scope.surrogateObj.content + "</p>");
+                    scope.element.append("<p class='post-author'> <span>Posted by</span><br>" + scope.surrogateObj.author + "</p>");
+                    scope.element.append("<p class='post-date'> <span>Date</span><br> " + scope.surrogateObj.dateDay + '.' + scope.surrogateObj.dateMonth + '.' + scope.surrogateObj.dateYear + "</p>");
+                  }
                   break;
                 case 'Social':
-                  scope.element.addClass('post');
-                  if(heriarchy == 1){
+                  if(heriarchy == 1)
                     scope.element.addClass('two-thirds column');
-                  }
-                  if(heriarchy == 2){
+                  if(heriarchy == 2)
                     scope.element.addClass('eight columns');
-                  }
-                  if(heriarchy == 3){
+                  if(heriarchy == 3)
                     scope.element.addClass('one-third column');
-                  }
-                  if(heriarchy == 4){
+                  if(heriarchy == 4)
                     scope.element.addClass('four columns');
+                  if(type == 'Imagen'){
+                    scope.element.css({
+                      'margin-bottom': '10px',
+                      'height': scope.socialSizes[heriarchy-1].height,
+                      'background-image': 'url(' + scope.surrogateObj.content + ')',
+                      'background-position': 'center center',
+                      'background-size': 'cover',
+                      'z-index': '-1',
+                      'float': 'left',
+                      'position': 'relative',
+                    });
+                    scope.element.append("<div class='hoverBlock'></div>");
+                    scope.element.append("<h1 class='image-title'>" + scope.surrogateObj.title + "</h1>");
+                    scope.element.append("<p class='image-author'> <span>Posted by</span><br>" + scope.surrogateObj.author + "</p>");
+                    scope.element.append("<p class='image-date'> <span>Date</span><br> " + scope.surrogateObj.dateDay + '.' + scope.surrogateObj.dateMonth + '.' + scope.surrogateObj.dateYear + "</p>");
                   }
-                  scope.element.css({
-                    'margin-bottom': '10px',
-                    'height': scope.socialSizes[heriarchy-1].height,
-                    'background-image': 'url(' + scope.surrogateObj.content + ')',
-                    'background-position': 'center center',
-                    'background-size': 'cover',
-                    'z-index': '-1',
-                    'float': 'left',
-                    'position': 'relative',
-                  });
-                  if(heriarchy == 4){
-                    scope.element.append("<p class='landscape-title-1' style='width: 210px !important;'>" + scope.surrogateObj.title + "</p>");
+                  else if(type == 'Texto'){
+                    scope.element.css({
+                      'margin-bottom': '10px',
+                      'height': scope.socialSizes[heriarchy-1].height,
+                      'z-index': '-1',
+                      'float': 'left',
+                      'position': 'relative',
+                    });
+                    scope.element.append("<h1 class='post-title'>" + scope.surrogateObj.title + "</h1>");
+                    scope.element.append("<p class='post-content'>" + scope.surrogateObj.content + "</p>");
+                    scope.element.append("<p class='post-author'> <span>Posted by</span><br>" + scope.surrogateObj.author + "</p>");
+                    scope.element.append("<p class='post-date'> <span>Date</span><br> " + scope.surrogateObj.dateDay + '.' + scope.surrogateObj.dateMonth + '.' + scope.surrogateObj.dateYear + "</p>");
                   }
-                  else{
-                    scope.element.append("<p class='landscape-title-1'>" + scope.surrogateObj.title + "</p>");
-                  }
-                  scope.element.append("<div class='hoverBlock'></div>");
-                  scope.element.append("<p class='landscape-author-1'> <span>Posted by</span><br>" + scope.surrogateObj.author + "</p>");
-                  scope.element.append("<p class='landscape-date-1'> <span>Date</span><br> " + scope.surrogateObj.dateDay + '.' + scope.surrogateObj.dateMonth + '.' + scope.surrogateObj.dateYear + "</p>");
                   break;
               }
             }

@@ -28,9 +28,11 @@
               Gigs
             </div>
           </a>
-          <div class="four columns menuTitle">
-            the mud howlers
-          </div>
+          <a ui-sref="home.landing" style="color:black;" ng-click="checkUrl('landing')">
+            <div class="four columns menuTitle">
+              the mud howlers
+            </div>
+          </a>
           <a ui-sref="home.media" class="menuLink" ng-click="checkUrl('media')">
             <div class="two columns" ng-class="{'selected': mediaSelected}">
               Media
