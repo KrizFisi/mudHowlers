@@ -3,23 +3,12 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', fu
       restrict: 'A',
       scope: false,
       link: function(scope, element, attrs){
-        angular.element($window).bind("scroll", function() {
-            var windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
-            var body = document.body, html = document.documentElement;
-            var docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
-            windowBottom = windowHeight + window.pageYOffset;
-            if (windowBottom >= docHeight) {
-                scope.begin+=11;
-                scope.end+=11;
-                scope.getData();
-            }
-        });
-        scope.begin = 0;
-        scope.end = 10;
+
+        scope.end = 0;
+        scope.start = 0;
         scope.isLoading = true;
+        scope.canScroll = true;
         var postsRef = 'https://mudhowlers.firebaseio.com/posts/';
-        var location = 'https://mudhowlers.firebaseio.com/' + attrs.getContent + '/posts/';
-        var firebaseRef = new Firebase(location);
         scope.posts = [];
 
         scope.landscapeSizes = [
@@ -42,62 +31,63 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', fu
           {height: '226px'},
         ];
 
-        scope.textSizes = ['four columns', 'four columns offset-by-three'];
-
-        scope.postsArray =  firebaseRef;
-        scope.getData = function(){
-
-          scope.postsArray.startAt(scope.begin).limit(scope.end).on('child_added', function(child){
-            if(child.val()){
-              if(child.key() == 1 && child.val()){ // exception that handles the child with id = 0
-                scope.childObj = $firebase(new Firebase(postsRef + '0')).$asObject();
-                scope.childObj.$loaded().then(function(data){
-                  if(data.status == true){
-                    if(data.contentType == 'Texto'){
-                      scope.posts.push(data);
-                    }
-                    if(data.contentType == 'Video'){
-                      scope.posts.push(data);
-                    }
-                    if(data.contentType == 'Imagen'){
-                      scope.posts.push(data);
-                    }
-                    else{
-                      // do nothing
-                    }
-                  }
+        /* DOM functions*/
+        angular.element($window).bind("scroll", function() {
+            var windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+            var body = document.body, html = document.documentElement;
+            var docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+            windowBottom = windowHeight + window.pageYOffset;
+            if (windowBottom >= docHeight) {
+              if(scope.start > 0 && scope.end > 0){
+                scope.end -= 2;
+                scope.start = scope.end - 1;
+                scope.getData();
+              }
+              else if(scope.start == 0 && scope.end == 1){
+                scope.$apply(function () {
+                  scope.canScroll = false;
                 });
               }
-              scope.childObj = $firebase(new Firebase(postsRef + child.key())).$asObject();
-              scope.childObj.$loaded().then(function(data){
-                if(data.status == true){
-                  if(data.contentType == 'Texto'){
-                    scope.posts.push(data);
-                  }
-                  if(data.contentType == 'Video'){
-                    scope.posts.push(data);
-                  }
-                  if(data.contentType == 'Imagen'){
-                    scope.posts.push(data);
-                  }
-                  else{
-                    // do nothing
-                  }
-                }
-              });
             }
-            else{
-              // if false, object has been deleted
-            }
+        });
+
+        /* scope functions*/
+        scope.getTotal = function(){
+          var total = $firebase(new Firebase('https://mudhowlers.firebaseio.com/postsCounter/')).$asObject();
+          total.$loaded().then(function(totalObj){
+            scope.end = totalObj.$value - 1;
+            scope.start = scope.end - 1;
+            scope.getData();
           });
         };
 
+        scope.getData = function(){
+          scope.postsArray = [];
+          scope.posts = [];
+          var childsRef;
+          childsRef = new Firebase(postsRef).startAt(scope.start).endAt(scope.end).limitToFirst(2);//.limitToLast(2);
+          scope.postsArray = $firebase(childsRef).$asArray();
+          scope.postsArray.$loaded().then(function(arrayData){
+            angular.forEach(arrayData, function(value, key) {
+              if(value.section == attrs.getContent){
+                scope.posts.push(value);
+              }
+              else{
+                // do nothing
 
-        var watchArray = scope.$watchCollection('posts', function() {
-          if(scope.posts.length != 0){
-            scope.isLoading = false;
+              }
+            });
+            scope.displayData();
+          });
+        };
+
+        scope.displayData = function(){
+          var index = 0;
+          scope.isLoading = false;
+          scope.posts.reverse();
+          angular.forEach(scope.posts, function(value, key) {
             element.append("<div class='newPost'></div>")
-            scope.surrogateObj = scope.posts[scope.posts.length - 1];
+            scope.surrogateObj = value;
             scope.element = angular.element(document.getElementsByClassName('newPost'));
             if(scope.surrogateObj.contentType == 'Video'){
               scope.element.addClass('post');
@@ -107,7 +97,7 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', fu
                 'height': '552px',
                 'float': 'left',
               });
-              scope.element.append("<iframe width='100%' height='100%' src='" + scope.surrogateObj.content + "'></iframe>");
+              scope.element.append("<iframe width='100%' height='100%' src='http://www.youtube.com/embed/" + scope.surrogateObj.content + "'></iframe>");
             }
             else{
               var heriarchy = scope.surrogateObj.heriarchy;
@@ -232,10 +222,11 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', fu
               }
             }
             scope.element.removeClass('newPost');
-          }
-        }, true);
+          });
+        };
 
-        scope.getData();
+
+        scope.getTotal();
       } /*end*/
     }
 }]);
