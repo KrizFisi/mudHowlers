@@ -18,10 +18,16 @@ function homeCtrl($scope, $document, $state, $window){
     }
   });
 
+  var reloadSize = $document[0].body.offsetWidth;
+  if (reloadSize >= 750){
+    $scope.responsiveMenu = true;
+    $scope.isSmall = false;
+  }
+  else{
+    $scope.responsiveMenu = false;
+    $scope.isSmall = true;
+  }
 
-
-  $scope.responsiveMenu = true;
-  $scope.isSmall = false;
   $scope.showMenu = function(){
     $scope.responsiveMenu = !$scope.responsiveMenu;
     $scope.isSmall = !$scope.isSmall
