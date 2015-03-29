@@ -61,26 +61,41 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', '$
           });
         };
 
+        scope.counter = 1;
         scope.getData = function(){
           scope.postsArray = [];
           scope.posts = [];
-          var childsRef;
-          childsRef = new Firebase(postsRef).startAt(scope.start).endAt(scope.end).limitToFirst(2);//.limitToLast(2);
-          scope.postsArray = $firebase(childsRef).$asArray();
+          var childrensRef;
+          childrensRef = new Firebase(postsRef).startAt(scope.start).endAt(scope.end).limitToFirst(2);//.limitToLast(2);
+          scope.postsArray = $firebase(childrensRef).$asArray();
           scope.postsArray.$loaded().then(function(arrayData){
+
             angular.forEach(arrayData, function(value, key) {
-              if(value.section == attrs.getContent){
-                scope.posts.push(value);
+              if(value.status){
+                if(value.section == attrs.getContent){
+
+                  scope.posts.push(value);
+                }
+                else{
+                  // do nothing
+
+                }
               }
               else{
-                // do nothing
-
+                // is deleted
               }
             });
-            scope.displayData();
-            scope.postsArray.$destroy();
           });
+          if(scope.postsArray[0] != undefined){
+            scope.postsArray.$destroy();
+          }
         };
+
+        scope.$watch('posts', function () {
+          angular.forEach(scope.posts, function(value, key) {
+            scope.displayData();
+          });
+        }, true);
 
         scope.displayData = function(){
           var index = 0;
@@ -223,7 +238,10 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', '$
               }
             }
             scope.element.removeClass('newPost');
+            scope.posts = [];
           });
+
+
         };
 
         scope.getTotal();
