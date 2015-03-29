@@ -3,7 +3,12 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', fu
       restrict: 'A',
       scope: false,
       link: function(scope, element, attrs){
-
+        window.onload = function() {
+          if(!window.location.hash) {
+              window.location = window.location + '#loaded';
+              window.location.reload();
+          }
+        }
         scope.end = 0;
         scope.start = 0;
         scope.isLoading = true;
