@@ -52,10 +52,6 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', '$
         });
 
         /* scope functions*/
-        scope.destroyCallbacks = function(){
-
-        };
-
         scope.getTotal = function(){
           var total = $firebase(new Firebase('https://mudhowlers.firebaseio.com/postsCounter/')).$asObject();
           total.$loaded().then(function(totalObj){
@@ -230,7 +226,6 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', '$
           });
         };
 
-        scope.destroyCallbacks();
         scope.getTotal();
       } /*end*/
     }
