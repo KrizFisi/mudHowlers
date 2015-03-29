@@ -1,14 +1,9 @@
-angular.module('mudHowlers').directive('landingContent', ['$firebase', '$window', '$timeout', function($firebase, $window, $timeout){
+angular.module('mudHowlers').directive('landingContent', ['$firebase', '$window', '$state', function($firebase, $window, $state){
     return{
       restrict: 'A',
       scope: false,
       link: function(scope, element, attrs){
-        window.onload = function() {
-          if(!window.location.hash) {
-              window.location = window.location + '#loaded';
-              window.location.reload();
-          }
-        }
+
         scope.end = 0;
         scope.start = 0;
         scope.isLoading = true;
@@ -75,6 +70,7 @@ angular.module('mudHowlers').directive('landingContent', ['$firebase', '$window'
               scope.posts.push(value);
             });
             scope.displayData();
+            scope.postsArray.$destroy();
           });
         };
 

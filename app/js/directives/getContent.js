@@ -1,21 +1,16 @@
-angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', function($firebase, $window){
+angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', '$state', function($firebase, $window, $state){
     return{
       restrict: 'A',
       scope: false,
       link: function(scope, element, attrs){
-        window.onload = function() {
-          if(!window.location.hash) {
-              window.location = window.location + '#loaded';
-              window.location.reload();
-          }
-        }
+
         scope.end = 0;
         scope.start = 0;
         scope.isLoading = true;
         scope.canScroll = true;
         var postsRef = 'https://mudhowlers.firebaseio.com/posts/';
         scope.posts = [];
-
+        scope.postsArray = [];
         scope.landscapeSizes = [
           {height: '618px'},
           {height: '410px'},
@@ -57,6 +52,10 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', fu
         });
 
         /* scope functions*/
+        scope.destroyCallbacks = function(){
+
+        };
+
         scope.getTotal = function(){
           var total = $firebase(new Firebase('https://mudhowlers.firebaseio.com/postsCounter/')).$asObject();
           total.$loaded().then(function(totalObj){
@@ -83,6 +82,7 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', fu
               }
             });
             scope.displayData();
+            scope.postsArray.$destroy();
           });
         };
 
@@ -230,7 +230,7 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', fu
           });
         };
 
-
+        scope.destroyCallbacks();
         scope.getTotal();
       } /*end*/
     }
