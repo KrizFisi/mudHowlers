@@ -1,4 +1,4 @@
-angular.module('mudHowlers').directive('landingContent', ['$firebase', '$window', '$timeout', function($firebase, $window, $timeout){
+angular.module('mudHowlers').directive('landingContent', ['$firebase', '$window', '$state', function($firebase, $window, $state){
     return{
       restrict: 'A',
       scope: false,
@@ -67,11 +67,24 @@ angular.module('mudHowlers').directive('landingContent', ['$firebase', '$window'
           scope.postsArray = $firebase(childsRef).$asArray();
           scope.postsArray.$loaded().then(function(arrayData){
             angular.forEach(arrayData, function(value, key) {
-              scope.posts.push(value);
+              if(value.status){
+                scope.posts.push(value);
+              }
+              else{
+                // do nothing
+              }
             });
+          });
+          if(scope.postsArray[0] != undefined){
+            scope.postsArray.$destroy();
+          }
+        };
+
+        scope.$watch('posts', function () {
+          angular.forEach(scope.posts, function(value, key) {
             scope.displayData();
           });
-        };
+        }, true);
 
 
         scope.displayData = function(){
@@ -215,7 +228,9 @@ angular.module('mudHowlers').directive('landingContent', ['$firebase', '$window'
               }
             }
             scope.element.removeClass('newPost');
+            scope.posts = [];
           });
+
         };
 
         scope.getTotal();

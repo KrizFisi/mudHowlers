@@ -1,4 +1,49 @@
 <div ng-controller="homeCtrl">
+  <div id="menuSuperContainer" class="transformable" ng-class="{'small':isSmall, 'big':!isSmall}" sticky>
+    <img src='img/menuIcon.svg' class='menuIcon' ng-click='showMenu()'>
+    <div class="container responsiveTitle">
+      the mud howlers
+    </div>
+    <div class="container menuAnimation" ng-show="responsiveMenu">
+      <nav>
+        <a ui-sref="home.about" class="menuLink" ng-click="checkUrl('about')">
+          <div class="two columns" ng-class="{'selected': aboutSelected}">
+            About
+          </div>
+        </a>
+        <a ui-sref="home.journal" class="menuLink" ng-click="checkUrl('journal')">
+          <div class="two columns" ng-class="{'selected': journalSelected}">
+            Journal
+          </div>
+        </a>
+        <a ui-sref="home.gigs" class="menuLink" ng-click="checkUrl('gigs')">
+          <div class="two columns" ng-class="{'selected': gigsSelected}">
+            Gigs
+          </div>
+        </a>
+        <a ui-sref="home.landing" style="color:black;" ng-click="checkUrl('landing')">
+          <div class="four columns menuTitle">
+            the mud howlers
+          </div>
+        </a>
+        <a ui-sref="home.media" class="menuLink" ng-click="checkUrl('media')">
+          <div class="two columns" ng-class="{'selected': mediaSelected}">
+            Media
+          </div>
+        </a>
+        <a class="menuLink" target="_blank" href="https://www.kichink.com/stores/themudhowlers#.VOoSiPnF_k2">
+        <div class="two columns">
+          Store
+        </div>
+        </a>
+        <a ui-sref="home.contact" class="menuLink" ng-click="checkUrl('contact')">
+          <div class="two columns" ng-class="{'selected': contactSelected}">
+            Contact
+          </div>
+        </a>
+      </nav>
+    </div>
+  </div>
   <div id="welcome">
     <span>&nbsp;</span>
   </div>
@@ -6,52 +51,6 @@
     <p id="logomain">The Mud Howlers</p>
   </div>
   <div id="content">
-    <div id="menuSuperContainer" class="transformable" ng-class="{'small':isSmall, 'big':!isSmall}" sticky>
-      <img src='img/menuIcon.svg' class='menuIcon' ng-click='showMenu()'>
-      <div class="container responsiveTitle">
-        the mud howlers
-      </div>
-      <div class="container menuAnimation" ng-show="responsiveMenu">
-        <nav>
-          <a ui-sref="home.about" class="menuLink" ng-click="checkUrl('about')">
-            <div class="two columns" ng-class="{'selected': aboutSelected}">
-              About
-            </div>
-          </a>
-          <a ui-sref="home.journal" class="menuLink" ng-click="checkUrl('journal')">
-            <div class="two columns" ng-class="{'selected': journalSelected}">
-              Journal
-            </div>
-          </a>
-          <a ui-sref="home.gigs" class="menuLink" ng-click="checkUrl('gigs')">
-            <div class="two columns" ng-class="{'selected': gigsSelected}">
-              Gigs
-            </div>
-          </a>
-          <a ui-sref="home.landing" style="color:black;" ng-click="checkUrl('landing')">
-            <div class="four columns menuTitle">
-              the mud howlers
-            </div>
-          </a>
-          <a ui-sref="home.media" class="menuLink" ng-click="checkUrl('media')">
-            <div class="two columns" ng-class="{'selected': mediaSelected}">
-              Media
-            </div>
-          </a>
-          <a class="menuLink" target="_blank" href="https://www.kichink.com/stores/themudhowlers#.VOoSiPnF_k2">
-          <div class="two columns">
-            Store
-          </div>
-          </a>
-          <a ui-sref="home.contact" class="menuLink" ng-click="checkUrl('contact')">
-            <div class="two columns" ng-class="{'selected': contactSelected}">
-              Contact
-            </div>
-          </a>
-        </nav>
-      </div>
-    </div>
-
     <div id="contentView">
       <div class="childView" ui-view></div>
     </div>

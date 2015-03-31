@@ -66,14 +66,13 @@ function gigsCtrl ($scope){ };
 
 app.controller('homeCtrl', homeCtrl);
 
-homeCtrl.$inject = ['$scope', '$document', '$state', '$window'];
+homeCtrl.$inject = ['$scope', '$document', '$state', '$stateParams', '$window'];
 
-function homeCtrl($scope, $document, $state, $window){
+function homeCtrl($scope, $document, $state, $stateParams, $window){
 
   var target = angular.element($window);
   target.bind('resize', function(){
     var currentSize = $document[0].body.offsetWidth;
-    console.log(currentSize);
     if (currentSize >= 750){
       $scope.responsiveMenu = true;
       $scope.isSmall = false;
@@ -84,10 +83,16 @@ function homeCtrl($scope, $document, $state, $window){
     }
   });
 
+  var reloadSize = $document[0].body.offsetWidth;
+  if (reloadSize >= 750){
+    $scope.responsiveMenu = true;
+    $scope.isSmall = false;
+  }
+  else{
+    $scope.responsiveMenu = false;
+    $scope.isSmall = true;
+  }
 
-
-  $scope.responsiveMenu = true;
-  $scope.isSmall = false;
   $scope.showMenu = function(){
     $scope.responsiveMenu = !$scope.responsiveMenu;
     $scope.isSmall = !$scope.isSmall
@@ -146,10 +151,10 @@ function homeCtrl($scope, $document, $state, $window){
         break;
     }
   };
+
   $scope.initialUrl = $state.$current.url.source;
   $scope.checkUrl($scope.initialUrl.substring(6));
 };
-
 app.controller('journalCtrl', journalCtrl);
 
 journalCtrl.$inject = ['$scope'];
