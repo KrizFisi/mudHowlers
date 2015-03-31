@@ -47,11 +47,17 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', '$
         };
 
         scope.animatePosts = function(){
-          console.log(element[0].children[0]);
           if(element[0].children[0] !== undefined){
-            var targets = document.getElementsByClassName('entering');
-            angular.element(targets).removeClass('entering');
-            angular.element(targets).addClass('arrived');
+            element.append('&nbsp;');
+            //console.log(element[0].children[0]);
+            element.append('<p>&nbsp;</p>');
+            //var targets = document.getElementsByClassName('entering');
+            var targets = angular.element(document.getElementsByClassName('entering'));
+            $timeout(function(){
+              targets.removeClass('entering');
+              targets.addClass('arrived');
+            }, 100);
+
           }
           else{
             // no childs

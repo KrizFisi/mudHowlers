@@ -57,9 +57,9 @@ body{
   }
 
   .canTransform{
-    transition: opacity 1s ease-in-out;
-   -moz-transition: opacity 1s ease-in-out;
-   -webkit-transition: opacity 1s ease-in-out;
+    transition: opacity 1.5s ease-in-out;
+   -moz-transition: opacity 1.5s ease-in-out;
+   -webkit-transition: opacity 1.5s ease-in-out;
   }
 
   .entering{
@@ -495,12 +495,10 @@ body{
        margin-top: 50px;
        font-family: 'Stanley';
        font-weight: 900;
+       border: none;
+       background-color: lightgrey;
        color: grey;
        cursor: pointer;
-       background: linear-gradient(#FFFFFF, #E0E0E0); /* Standard syntax */
-       -webkit-box-shadow: 0 8px 6px -4px #C8C8C8;
-       -moz-box-shadow:    0 8px 6px -4px #C8C8C8;
-       box-shadow:         0 8px 6px -4px #C8C8C8;
        font-size: 1em;
      }
 
