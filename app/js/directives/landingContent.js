@@ -1,13 +1,18 @@
-angular.module('mudHowlers').directive('landingContent', ['$firebase', '$window', '$state', function($firebase, $window, $state){
+angular.module('mudHowlers').directive('landingContent', ['$firebase', '$window', '$state', '$timeout', function($firebase, $window, $state, $timeout){
     return{
       restrict: 'A',
       scope: false,
       link: function(scope, element, attrs){
 
+        scope.startValue = 0;
+        scope.startPoint = 0;
         scope.end = 0;
-        scope.start = 0;
+        scope.limit = 4;
         scope.isLoading = true;
-        scope.canScroll = true;
+        scope.buttonDisabled = true;
+        scope.lastOneIn = false;
+
+        scope.start = 0;
         var postsRef = 'https://mudhowlers.firebaseio.com/posts/';
         scope.posts = [];
         scope.postsArray =  [];
@@ -29,37 +34,85 @@ angular.module('mudHowlers').directive('landingContent', ['$firebase', '$window'
           {height: '226px'},
         ];
 
-        /* DOM functions */
-        angular.element($window).bind("scroll", function() {
-            var windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
-            var body = document.body, html = document.documentElement;
-            var docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
-            windowBottom = windowHeight + window.pageYOffset;
-            if (windowBottom >= docHeight) {
-              if(scope.start > 0 && scope.end > 0){
-                scope.end -= 2;
-                scope.start = scope.end - 1;
-                scope.getData();
-              }
-              else if(scope.start == 0 && scope.end == 1){
-                scope.$apply(function () {
-                  scope.canScroll = false;
-                });
-              }
-            }
-        });
 
         /* scope functions */
         scope.getTotal = function(){
           var total = $firebase(new Firebase('https://mudhowlers.firebaseio.com/postsCounter/')).$asObject();
           total.$loaded().then(function(totalObj){
             scope.end = totalObj.$value - 1;
-            scope.start = scope.end - 1;
+            scope.startValue = scope.end - (scope.limit-1);
+            scope.totalPosts = totalObj.$value;
             scope.getData();
           });
         };
 
+        scope.animatePosts = function(){
+          if(element[0].children[0] !== undefined){
+            element.append('&nbsp;');
+            element.append('<p>&nbsp;</p>');
+            var targets = angular.element(document.getElementsByClassName('entering'));
+            $timeout(function(){
+              targets.removeClass('entering');
+              targets.addClass('arrived');
+            }, 100);
+          }
+          else{
+            // no childs
+          }
+        };
+
         scope.getData = function(){
+          if(scope.startValue >= -2){
+            scope.postsArray = [];
+            scope.posts = [];
+            var childrensRef, childObj;
+            childrensRef = new Firebase(postsRef).orderByPriority().startAt(scope.startValue).limitToFirst(scope.limit);//.limitToLast(2);
+            scope.postsArray = $firebase(childrensRef).$asArray();
+            scope.postsArray.$loaded().then(function(arrayData){
+              angular.forEach(arrayData, function(arrayObj, key) {
+                console.log(arrayObj)
+                if(arrayObj.status === true){
+                  if(arrayObj.$priority === 0){
+                    console.log('last one');
+                    scope.lastOneIn = true;
+                  }
+                  scope.posts.push(arrayObj);
+                }
+                else{
+                  // do nothing
+                }
+                /*
+                if(arrayObj.status === true){
+                  if(arrayObj.$priority === 0){
+                    console.log('last one');
+                    scope.lastOneIn = true;
+                  }
+                  childObj = $firebase(new Firebase(postsRef + arrayObj.$id)).$asObject();
+                  childObj.$loaded().then(function(childData){
+                    if(childData.status === true){
+                      scope.posts.push(childData);
+                    }
+                    else{
+                      // do nothing
+                    }
+                  });
+                }
+                else{
+                    // do nothing
+                }
+                */
+              });
+            });
+            if(scope.postsArray[0] != undefined){
+              scope.postsArray.$destroy();
+            }
+            scope.startValue -= scope.limit;
+
+          }
+          else{
+            scope.buttonDisabled = false;
+          }
+          /*
           scope.postsArray = [];
           scope.posts = [];
           var childsRef;
@@ -78,12 +131,19 @@ angular.module('mudHowlers').directive('landingContent', ['$firebase', '$window'
           if(scope.postsArray[0] != undefined){
             scope.postsArray.$destroy();
           }
+          */
         };
 
         scope.$watch('posts', function () {
-          angular.forEach(scope.posts, function(value, key) {
-            scope.displayData();
-          });
+          if(scope.posts.length === scope.limit){
+            angular.forEach(scope.posts, function(value, key) {
+              scope.displayData();
+            });
+            scope.animatePosts();
+          }
+          else{
+            // do nothing
+          }
         }, true);
 
 
@@ -91,10 +151,16 @@ angular.module('mudHowlers').directive('landingContent', ['$firebase', '$window'
           var index = 0;
           scope.isLoading = false;
           scope.posts.reverse();
+          if(scope.lastOneIn === true){
+            scope.posts.pop();
+            scope.posts.pop();
+          }
           angular.forEach(scope.posts, function(value, key) {
             element.append("<div class='newPost'></div>")
             scope.surrogateObj = value;
             scope.element = angular.element(document.getElementsByClassName('newPost'));
+            scope.element.addClass('entering');
+            scope.element.addClass('canTransform');
             if(scope.surrogateObj.contentType == 'Video'){
               scope.element.addClass('post');
               scope.element.addClass('sixteen columns');

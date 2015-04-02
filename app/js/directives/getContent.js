@@ -49,15 +49,12 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', '$
         scope.animatePosts = function(){
           if(element[0].children[0] !== undefined){
             element.append('&nbsp;');
-            //console.log(element[0].children[0]);
             element.append('<p>&nbsp;</p>');
-            //var targets = document.getElementsByClassName('entering');
             var targets = angular.element(document.getElementsByClassName('entering'));
             $timeout(function(){
               targets.removeClass('entering');
               targets.addClass('arrived');
             }, 100);
-
           }
           else{
             // no childs
@@ -73,20 +70,24 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', '$
             scope.postsArray = $firebase(childrensRef).$asArray();
             scope.postsArray.$loaded().then(function(arrayData){
               angular.forEach(arrayData, function(arrayObj, key) {
-                if(arrayObj.$priority === 0){
-                  console.log('last one');
-                  scope.lastOneIn = true;
+                if(arrayObj.status === true){
+                  if(arrayObj.$priority === 0){
+                    console.log('last one');
+                    scope.lastOneIn = true;
+                  }
+                  childObj = $firebase(new Firebase(postsRef + arrayObj.$id)).$asObject();
+                  childObj.$loaded().then(function(childData){
+                    if(childData.status === true){
+                      scope.posts.push(childData);
+                    }
+                    else{
+                      // do nothing
+                    }
+                  });
                 }
-                childObj = $firebase(new Firebase(postsRef + arrayObj.$id)).$asObject();
-                childObj.$loaded().then(function(childData){
-                  //console.log(childData);
-                  if(childData.status){
-                    scope.posts.push(childData);
-                  }
-                  else{
+                else{
                     // do nothing
-                  }
-                });
+                }
               });
             });
             if(scope.postsArray[0] != undefined){
