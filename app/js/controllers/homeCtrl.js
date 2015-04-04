@@ -40,6 +40,15 @@ function homeCtrl($scope, $document, $state, $stateParams, $window){
   );
 
   $scope.checkUrl = function(url){
+    var reloadSize = $document[0].body.offsetWidth;
+    if (reloadSize >= 750){
+      $scope.responsiveMenu = true;
+      $scope.isSmall = false;
+    }
+    else{
+      $scope.responsiveMenu = false;
+      $scope.isSmall = true;
+    }
     switch(url){
       case 'about':
         $scope.aboutSelected = true;

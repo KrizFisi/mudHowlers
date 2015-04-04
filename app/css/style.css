@@ -398,7 +398,7 @@ body{
       position: absolute;
       bottom: 25px;
       left: 125px;
-      width: 200px;
+      width: 100px;
       margin: 0;
       font-weight: 700;
       font-style: italic;
@@ -478,7 +478,7 @@ body{
        position: absolute;
        bottom: 25px;
        left: 125px;
-       width: 180px;
+       width: 100px;
        margin: 0;
        font-weight: 700;
        font-style: italic;
@@ -528,6 +528,25 @@ body{
 
    @media only screen and (min-width: 768px) and (max-width: 959px){
      .menuTitle{
+       font-size: 1em;
+     }
+     #logomain{
+       font-size: 5em;
+     }
+
+     .post.one-third.column{
+       height: 250px !important;
+     }
+     .post.eight.columns{
+       height: 340px !important;
+     }
+
+     .post-title{
+       font-size: 1.1em;
+     }
+
+     .post-content{
+       margin-top: 0;
        font-size: 1em;
      }
    }

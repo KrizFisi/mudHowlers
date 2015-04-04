@@ -2,7 +2,9 @@
   <div id="menuSuperContainer" class="transformable" ng-class="{'small':isSmall, 'big':!isSmall}" sticky>
     <img src='img/menuIcon.svg' class='menuIcon' ng-click='showMenu()'>
     <div class="container responsiveTitle">
-      the mud howlers
+      <a ui-sref="home.landing" style="color:black; text-decoration: none" ng-click="checkUrl('landing')">
+          the mud howlers
+      </a>
     </div>
     <div class="container menuAnimation" ng-show="responsiveMenu">
       <nav>
