@@ -48,15 +48,26 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 
 app.controller('aboutCtrl', aboutCtrl);
 
-aboutCtrl.$inject = ['$scope'];
+aboutCtrl.$inject = ['$scope', '$state', '$firebase'];
 
-function aboutCtrl ($scope){ };
+function aboutCtrl ($scope, $state, $firebase){
+  var ref = new Firebase('https://mudhowlers.firebaseio.com/aboutText/');
+  $scope.textObj = $firebase(ref).$asObject();
+  $scope.textObj.$bindTo($scope, "data").then(function(){
+    $scope.aboutText = $scope.data.$value;
+  });
+};
+
 
 app.controller('contactCtrl', contactCtrl);
 
-contactCtrl.$inject = ['$scope'];
+contactCtrl.$inject = ['$scope', '$firebase'];
 
-function contactCtrl ($scope){ };
+function contactCtrl ($scope, $firebase){
+  var ref = new Firebase('https://mudhowlers.firebaseio.com/contacts');
+  $scope.contacts = $firebase(ref).$asArray();
+};
+
 
 app.controller('gigsCtrl', gigsCtrl);
 
@@ -106,6 +117,15 @@ function homeCtrl($scope, $document, $state, $stateParams, $window){
   );
 
   $scope.checkUrl = function(url){
+    var reloadSize = $document[0].body.offsetWidth;
+    if (reloadSize >= 750){
+      $scope.responsiveMenu = true;
+      $scope.isSmall = false;
+    }
+    else{
+      $scope.responsiveMenu = false;
+      $scope.isSmall = true;
+    }
     switch(url){
       case 'about':
         $scope.aboutSelected = true;
