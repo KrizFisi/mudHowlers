@@ -1,9 +1,8 @@
-angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', '$state', '$timeout', function($firebase, $window, $state, $timeout){
+angular.module('mudHowlers').directive('gigsContent', ['$firebase', '$window', '$state', '$timeout', function($firebase, $window, $state, $timeout){
     return{
       restrict: 'A',
       scope: false,
       link: function(scope, element, attrs){
-
         scope.totalPosts = 0;
         scope.startValue = 0;
         scope.end = 0;
@@ -16,7 +15,8 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', '$
 
 
         var postsRef = 'https://mudhowlers.firebaseio.com/posts/';
-        var sectionRef = 'https://mudhowlers.firebaseio.com/' + attrs.getContent + '/posts/';
+        var sectionRef = 'https://mudhowlers.firebaseio.com/Gigs/posts';
+        var priorityRef = 'https://mudhowlers.firebaseio.com/Gigs/priorityCounter';
         scope.posts = [];
         scope.postsArray = [];
         scope.landscapeSizes = [
@@ -39,7 +39,7 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', '$
 
         /* scope functions*/
         scope.getTotal = function(){
-          var total = $firebase(new Firebase('https://mudhowlers.firebaseio.com/'+ attrs.getContent +'/priorityCounter/')).$asObject();
+          var total = $firebase(new Firebase(priorityRef)).$asObject();
           total.$loaded().then(function(totalObj){
             scope.totalPosts = totalObj.$value;
             for(var i = 3; i <= scope.totalPosts; i++){
@@ -75,13 +75,13 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', '$
             childrensRef = new Firebase(sectionRef).orderByPriority().startAt(scope.startValue).limitToFirst(scope.limit);//.limitToLast(2);
             scope.postsArray = $firebase(childrensRef).$asArray();
             scope.postsArray.$loaded().then(function(arrayData){
+              console.log(arrayData);
               angular.forEach(arrayData, function(arrayObj, key) {
                 if(arrayObj.$priority === 0){
                   scope.lastOneIn = true;
                 }
                 childObj = $firebase(new Firebase(postsRef + arrayObj.$id)).$asObject();
                 childObj.$loaded().then(function(childData){
-                  console.log(childData);
                   scope.posts.push(childData);
                   scope.checkIfReachedLimit();
                 });
@@ -109,11 +109,15 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', '$
             // do nothing
           }
         };
+
         /*
         scope.$watch('posts', function () {
           if(scope.posts.length >= scope.limit){
             angular.forEach(scope.posts, function(value, key) {
               scope.displayData();
+              $timeout(function(){
+                scope.displayData();
+              }, 100);
             });
             scope.animatePosts();
           }

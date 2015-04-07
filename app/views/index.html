@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="mudHowlers">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="UTF-8">
+		<link rel="shortcut icon" href="img/favicon.ico">
+		<title>The Mud Howlers</title>
+		<!-- STYLES-->
+		  <link rel="stylesheet" type="text/css" href="css/style.min.css">
+			<link rel="stylesheet" type="text/css" href="css/skeleton.min.css">
+	</head>
+	<body>
+		<!--[if IE]>
+			<p style="width: 100%; text-align: center; font-family: Arial, sans-serif; font-size: 3.5em;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    	<style>
+			div{
+				display: none;
+			}
+			</style>
+		<![endif]-->
+
+		<div ui-view></div>
+
+
+		<!-- ANGULAR -->
+		<script src="https://www.youtube.com/iframe_api"></script>
+		<script src="bower_components/angular/angular.min.js"></script>
+		<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+		<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+		<!-- FIREBASE -->
+		  <script src="bower_components/firebase/firebase.js"></script>
+		<!-- ANGULARFIRE -->
+		  <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
+		<!-- CONFIG -->
+		  <script src="js/app.min.js"></script>
+    <!-- DIRECTIVES -->
+		<script src="bower_components/ngSticky/dist/sticky.min.js"></script>
+		<script src="js/directives/getContent.min.js"></script>
+		<script src="js/directives/gigsContent.js"></script>
+		<script src="js/directives/landingContent.min.js"></script>
+	</body>
+</html>
