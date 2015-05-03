@@ -3,6 +3,7 @@ var app = angular.module('mudHowlers', [
   'ngAnimate',
   'sticky',
   'firebase',
+  'smoothScroll'
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
@@ -77,9 +78,9 @@ function gigsCtrl ($scope){ };
 
 app.controller('homeCtrl', homeCtrl);
 
-homeCtrl.$inject = ['$scope', '$document', '$state', '$stateParams', '$window'];
+homeCtrl.$inject = ['$scope', '$document', '$state', '$stateParams', '$window', '$firebase', 'anchorSmoothScroll'];
 
-function homeCtrl($scope, $document, $state, $stateParams, $window){
+function homeCtrl($scope, $document, $state, $stateParams, $window, $firebase, anchorSmoothScroll){
 
   var target = angular.element($window);
   target.bind('resize', function(){
@@ -109,12 +110,19 @@ function homeCtrl($scope, $document, $state, $stateParams, $window){
     $scope.isSmall = !$scope.isSmall
   };
 
-  $scope.images = ['url(img/1.jpg)', 'url(img/2.jpg)', 'url(img/3.jpg)', 'url(img/4.jpg)', 'url(img/5.jpg)', 'url(img/6.jpg)'];
-  var target = document.getElementById('welcome');
-  $scope.welcome = angular.element(target);
-  $scope.welcome.css(
-    {'background-image': '' + $scope.images[Math.floor(Math.random() *      $scope.images.length)]}
-  );
+  //$scope.images = ['url(img/1.jpg)', 'url(img/2.jpg)', 'url(img/3.jpg)', 'url(img/4.jpg)', 'url(img/5.jpg)', 'url(img/6.jpg)'];
+  $scope.images = $firebase(new Firebase('https://mudhowlers.firebaseio.com/landingImages')).$asArray();
+  $scope.images.$loaded().then(function(data){
+    //console.log(data);
+    var target = document.getElementById('welcome');
+    $scope.welcome = angular.element(target);
+    $scope.welcome.css(
+      {'background-image': 'url(' + $scope.images[Math.floor(Math.random() * $scope.images.length)].src + ')'}
+    );
+  });
+
+
+
 
   $scope.checkUrl = function(url){
     var reloadSize = $document[0].body.offsetWidth;
@@ -126,6 +134,7 @@ function homeCtrl($scope, $document, $state, $stateParams, $window){
       $scope.responsiveMenu = false;
       $scope.isSmall = true;
     }
+
     switch(url){
       case 'about':
         $scope.aboutSelected = true;
@@ -133,6 +142,9 @@ function homeCtrl($scope, $document, $state, $stateParams, $window){
         $scope.journalSelected = false;
         $scope.mediaSelected = false;
         $scope.gigsSelected = false;
+        //if(angular.element($window)[0].scrollY === 0){
+          anchorSmoothScroll.scrollTo('targetScroll');
+        //}
         break;
       case 'contact':
         $scope.aboutSelected = false;
@@ -140,6 +152,9 @@ function homeCtrl($scope, $document, $state, $stateParams, $window){
         $scope.journalSelected = false;
         $scope.mediaSelected = false;
         $scope.gigsSelected = false;
+        //if(angular.element($window)[0].scrollY === 0){
+          anchorSmoothScroll.scrollTo('targetScroll');
+        //}
         break;
       case 'journal':
         $scope.aboutSelected = false;
@@ -147,6 +162,9 @@ function homeCtrl($scope, $document, $state, $stateParams, $window){
         $scope.journalSelected = true;
         $scope.mediaSelected = false;
         $scope.gigsSelected = false;
+        //if(angular.element($window)[0].scrollY === 0){
+          anchorSmoothScroll.scrollTo('targetScroll');
+        //}
         break;
       case 'media':
         $scope.mediaSelected = true;
@@ -154,6 +172,9 @@ function homeCtrl($scope, $document, $state, $stateParams, $window){
         $scope.contactSelected = false;
         $scope.journalSelected = false;
         $scope.gigsSelected = false;
+        //if(angular.element($window)[0].scrollY === 0){
+          anchorSmoothScroll.scrollTo('targetScroll');
+        //}
         break;
       case 'gigs':
         $scope.gigsSelected = true;
@@ -161,6 +182,9 @@ function homeCtrl($scope, $document, $state, $stateParams, $window){
         $scope.aboutSelected = false;
         $scope.contactSelected = false;
         $scope.journalSelected = false;
+        if(angular.element($window)[0].scrollY === 0){
+          anchorSmoothScroll.scrollTo('targetScroll');
+        }
         break;
       case 'landing':
         $scope.gigsSelected = false;

@@ -81,7 +81,6 @@ angular.module('mudHowlers').directive('getContent', ['$firebase', '$window', '$
                 }
                 childObj = $firebase(new Firebase(postsRef + arrayObj.$id)).$asObject();
                 childObj.$loaded().then(function(childData){
-                  console.log(childData);
                   scope.posts.push(childData);
                   scope.checkIfReachedLimit();
                 });

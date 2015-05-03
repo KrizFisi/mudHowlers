@@ -1,8 +1,8 @@
 angular.module('mudHowlers').controller('homeCtrl', homeCtrl);
 
-homeCtrl.$inject = ['$scope', '$document', '$state', '$stateParams', '$window', '$firebase'];
+homeCtrl.$inject = ['$scope', '$document', '$state', '$stateParams', '$window', '$firebase', 'anchorSmoothScroll'];
 
-function homeCtrl($scope, $document, $state, $stateParams, $window, $firebase){
+function homeCtrl($scope, $document, $state, $stateParams, $window, $firebase, anchorSmoothScroll){
 
   var target = angular.element($window);
   target.bind('resize', function(){
@@ -36,7 +36,6 @@ function homeCtrl($scope, $document, $state, $stateParams, $window, $firebase){
   $scope.images = $firebase(new Firebase('https://mudhowlers.firebaseio.com/landingImages')).$asArray();
   $scope.images.$loaded().then(function(data){
     //console.log(data);
-    console.log($scope.images[Math.floor(Math.random() * $scope.images.length)]);
     var target = document.getElementById('welcome');
     $scope.welcome = angular.element(target);
     $scope.welcome.css(
@@ -57,6 +56,7 @@ function homeCtrl($scope, $document, $state, $stateParams, $window, $firebase){
       $scope.responsiveMenu = false;
       $scope.isSmall = true;
     }
+
     switch(url){
       case 'about':
         $scope.aboutSelected = true;
@@ -64,6 +64,9 @@ function homeCtrl($scope, $document, $state, $stateParams, $window, $firebase){
         $scope.journalSelected = false;
         $scope.mediaSelected = false;
         $scope.gigsSelected = false;
+        //if(angular.element($window)[0].scrollY === 0){
+          anchorSmoothScroll.scrollTo('targetScroll');
+        //}
         break;
       case 'contact':
         $scope.aboutSelected = false;
@@ -71,6 +74,9 @@ function homeCtrl($scope, $document, $state, $stateParams, $window, $firebase){
         $scope.journalSelected = false;
         $scope.mediaSelected = false;
         $scope.gigsSelected = false;
+        //if(angular.element($window)[0].scrollY === 0){
+          anchorSmoothScroll.scrollTo('targetScroll');
+        //}
         break;
       case 'journal':
         $scope.aboutSelected = false;
@@ -78,6 +84,9 @@ function homeCtrl($scope, $document, $state, $stateParams, $window, $firebase){
         $scope.journalSelected = true;
         $scope.mediaSelected = false;
         $scope.gigsSelected = false;
+        //if(angular.element($window)[0].scrollY === 0){
+          anchorSmoothScroll.scrollTo('targetScroll');
+        //}
         break;
       case 'media':
         $scope.mediaSelected = true;
@@ -85,6 +94,9 @@ function homeCtrl($scope, $document, $state, $stateParams, $window, $firebase){
         $scope.contactSelected = false;
         $scope.journalSelected = false;
         $scope.gigsSelected = false;
+        //if(angular.element($window)[0].scrollY === 0){
+          anchorSmoothScroll.scrollTo('targetScroll');
+        //}
         break;
       case 'gigs':
         $scope.gigsSelected = true;
@@ -92,6 +104,9 @@ function homeCtrl($scope, $document, $state, $stateParams, $window, $firebase){
         $scope.aboutSelected = false;
         $scope.contactSelected = false;
         $scope.journalSelected = false;
+        if(angular.element($window)[0].scrollY === 0){
+          anchorSmoothScroll.scrollTo('targetScroll');
+        }
         break;
       case 'landing':
         $scope.gigsSelected = false;

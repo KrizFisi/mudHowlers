@@ -2,7 +2,8 @@ angular.module('mudHowlers', [
   'ui.router',
   'ngAnimate',
   'sticky',
-  'firebase'
+  'firebase',
+  'smoothScroll'
 ]).
 config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
