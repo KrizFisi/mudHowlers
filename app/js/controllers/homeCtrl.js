@@ -4,7 +4,17 @@ homeCtrl.$inject = ['$scope', '$document', '$state', '$stateParams', '$window', 
 
 function homeCtrl($scope, $document, $state, $stateParams, $window, $firebase, anchorSmoothScroll){
 
+  $scope.displayMenu = false;
+
   var target = angular.element($window);
+
+  target.scrollY = 0;
+
+  target.bind('scroll', function(){
+    $scope.displayMenu = true;
+    $scope.$apply();
+  });
+
   target.bind('resize', function(){
     var currentSize = $document[0].body.offsetWidth;
     if (currentSize >= 750){

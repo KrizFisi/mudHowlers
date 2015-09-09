@@ -1,5 +1,5 @@
 <div ng-controller="homeCtrl">
-  <div id="menuSuperContainer" class="transformable" ng-class="{'small':isSmall, 'big':!isSmall}" sticky>
+  <div id="menuSuperContainer" class="transformable" ng-show="displayMenu" ng-class="{'small':isSmall, 'big':!isSmall}" sticky>
     <img src='img/menuIcon.svg' class='menuIcon' ng-click='showMenu()'>
     <div class="container responsiveTitle">
       <a ui-sref="home.landing" style="color:black; text-decoration: none" ng-click="checkUrl('landing')">
